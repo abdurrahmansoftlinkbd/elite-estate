@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "category": "Home Buying Tips",
+    "image": "https://i.ibb.co.com/dLFfQL1/aaron-huber-G7s-E2-S4-Lab4-unsplash.jpg",
+    "title": "Top 10 Tips for First-Time Homebuyers",
+    "description": "Discover essential tips and tricks for first-time homebuyers, including budgeting, financing, and choosing the right property.",
+    "addedBy": "Daniel",
+    "date": "January 13, 2025"
+  },
+  {
+    "id": 2,
+    "category": "Luxury Properties",
+    "image": "https://i.ibb.co.com/w6Lr7cR/brian-babb-Xbw-Hrt87m-Q0-unsplash.jpg",
+    "title": "New Luxury Villas Launch in California",
+    "description": "Explore the newly launched luxury villas in California, featuring modern designs, eco-friendly features, and waterfront views.",
+    "addedBy": "Michael Smith",
+    "date": "January 12, 2025"
+  },
+  {
+    "id": 3,
+    "category": "Investment Opportunities",
+    "image": "https://i.ibb.co.com/sjD2gvP/filtergrade-4-T4-Ac-GJv-ARQ-unsplash.jpg",
+    "title": "Top Real Estate Investment Cities for 2025",
+    "description": "Check out the top cities offering high ROI for real estate investments in 2025, based on recent market analyses.",
+    "addedBy": "James",
+    "date": "January 09, 2025"
+  }
+]
