@@ -1,4 +1,47 @@
+import { Link, NavLink } from "react-router-dom";
+
 const Navbar = () => {
+  const links = (
+    <>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `px-3 py-2 font-semibold transition-colors duration-200 ease-in-out rounded-md ${
+            isActive
+              ? "font-bold bg-white text-default rounded-md"
+              : "hover:bg-white hover:text-default hover:rounded-md"
+          }`
+        }
+      >
+        Home
+      </NavLink>
+      <NavLink
+        to="/allProperties"
+        className={({ isActive }) =>
+          `px-3 py-2 font-semibold transition-colors duration-200 ease-in-out rounded-md ${
+            isActive
+              ? "font-bold bg-white text-default rounded-md"
+              : "hover:bg-white hover:text-default hover:rounded-md"
+          }`
+        }
+      >
+        All Properties
+      </NavLink>
+      <NavLink
+        to="/dashboard"
+        className={({ isActive }) =>
+          `px-3 py-2 font-semibold transition-colors duration-200 ease-in-out rounded-md ${
+            isActive
+              ? "font-bold bg-white text-default rounded-md"
+              : "hover:bg-white hover:text-default hover:rounded-md"
+          }`
+        }
+      >
+        Dashboard
+      </NavLink>
+    </>
+  );
+
   return (
     <div className="navbar container w-11/12 mx-auto">
       <div className="navbar-start">
@@ -42,29 +85,20 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <Link className="flex items-center gap-1">
+          <div className="w-10">
+            <img
+              src="https://i.ibb.co.com/0BkVPkm/investment.png"
+              alt="elite-estate-logo"
+              className="w-full"
+            />
+          </div>
+          <h1 className="text-3xl font-bold font-playfair">Elite Estate</h1>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-          <li>
-            <a>Item 1</a>
-          </li>
-          <li>
-            <details>
-              <summary>Parent</summary>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </details>
-          </li>
-          <li>
-            <a>Item 3</a>
-          </li>
+        <ul className="menu menu-horizontal items-center gap-4 px-1">
+          {links}
         </ul>
       </div>
       <div className="navbar-end">
