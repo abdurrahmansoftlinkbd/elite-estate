@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../shared/Navbar";
+import Footer from "../shared/Footer";
 
 const MainLayout = () => {
   return (
@@ -10,6 +11,9 @@ const MainLayout = () => {
       <main>
         <Outlet></Outlet>
       </main>
+      <footer className="bg-default font-inter">
+        <Footer></Footer>
+      </footer>
     </>
   );
 };
