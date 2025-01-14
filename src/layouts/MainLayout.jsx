@@ -4,7 +4,7 @@ import Navbar from "../shared/Navbar";
 const MainLayout = () => {
   return (
     <>
-      <nav>
+      <nav className="bg-default text-white">
         <Navbar></Navbar>
       </nav>
       <Outlet></Outlet>
