@@ -7,7 +7,9 @@ const MainLayout = () => {
       <nav className="bg-default text-white font-inter py-1">
         <Navbar></Navbar>
       </nav>
-      <Outlet></Outlet>
+      <main>
+        <Outlet></Outlet>
+      </main>
     </>
   );
 };
