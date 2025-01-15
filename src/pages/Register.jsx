@@ -41,15 +41,23 @@ const Register = () => {
           photoURL: imageUrl,
         })
           .then(() => {
+            // const userInfo = {
+            //   name: name,
+            //   email: email,
+            // };
+            // axios.post("http://localhost:5000/users", userInfo).then((res) => {
+            //   if (res.data.insertedId) {
+            form.reset();
+            toast.success("Welcome to Elite Estate");
             navigate("/");
+            //   }
+            // });
           })
           .catch((error) => {
             toast.error(`Unable to update profile. ${error}`);
           });
-        toast.success("Welcome to Elite Estate");
       })
       .catch((error) => toast.error(`${error.code}`));
-    form.reset();
   };
 
   return (

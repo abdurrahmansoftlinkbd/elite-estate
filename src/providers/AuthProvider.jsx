@@ -12,6 +12,7 @@ import {
 } from "firebase/auth";
 import toast from "react-hot-toast";
 import auth from "../firebase/firebase.init";
+import axios from "axios";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -23,6 +24,13 @@ const AuthProvider = ({ children }) => {
     return signInWithPopup(auth, googleProvider)
       .then((result) => {
         const user = result.user;
+        const userInfo = {
+          email: result.user?.email,
+          name: result.user?.displayName,
+        };
+        axios.post("http://localhost:5000/users", userInfo).then((res) => {
+          console.log(res.data);
+        });
         setUser(user);
       })
       .catch((error) => {
