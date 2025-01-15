@@ -3,27 +3,34 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import AuthContext from "../providers/AuthContext";
+import axios from "axios";
 
 const Register = () => {
   const { createUser, setUser, updateUserProfile, handleGoogleSignIn } =
     useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     const form = e.target;
     const name = form.name.value;
-    const photourl = form.photourl.value;
     const email = form.email.value;
     const regex = /^(?=.*[A-Z])(?=.*[\W]).+$/;
     const password = form.password.value;
-
     if (!regex.test(password)) {
       toast.error(
         "Password must contain at least one uppercase letter and one special character."
       );
       return;
     }
+    const image = form.image.files[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    const { data } = await axios.post(
+      `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_api}`,
+      formData
+    );
+    const imageUrl = data.data.display_url;
 
     createUser(email, password)
       .then((result) => {
@@ -31,7 +38,7 @@ const Register = () => {
         setUser(user);
         updateUserProfile({
           displayName: name,
-          photoURL: photourl,
+          photoURL: imageUrl,
         })
           .then(() => {
             navigate("/");
@@ -67,14 +74,13 @@ const Register = () => {
             </div>
             <div className="form-control w-full">
               <label className="label">
-                <span className="label-text">Photo URL</span>
+                <span className="label-text">Upload Profile Picture</span>
               </label>
               <input
-                type="text"
-                name="photourl"
-                placeholder="Photo URL"
-                className="input input-bordered"
-                required
+                type="file"
+                name="image"
+                accept="image/*"
+                className="file-input file-input-bordered file-input-accent w-full max-w-xs"
               />
             </div>
           </div>
