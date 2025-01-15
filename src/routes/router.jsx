@@ -7,6 +7,7 @@ import ErrorPage from "../pages/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../layouts/Dashboard";
 import AdminProfile from "../pages/Dashboard/Admin/AdminProfile";
+import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 
 const router = createBrowserRouter([
   {
@@ -37,8 +38,12 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "adminProfile",
+        index: true,
         element: <AdminProfile></AdminProfile>,
+      },
+      {
+        path: "manageUsers",
+        element: <ManageUsers></ManageUsers>,
       },
     ],
   },
