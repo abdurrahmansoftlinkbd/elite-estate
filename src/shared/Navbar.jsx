@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
+import AuthContext from "../providers/AuthContext";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
   const links = (
     <>
       <NavLink
@@ -14,30 +18,6 @@ const Navbar = () => {
         }
       >
         Home
-      </NavLink>
-      <NavLink
-        to="/allProperties"
-        className={({ isActive }) =>
-          `px-3 py-2 font-semibold transition-colors duration-200 ease-in-out rounded-md ${
-            isActive
-              ? "font-bold bg-white text-default rounded-md"
-              : "hover:bg-white hover:text-default hover:rounded-md"
-          }`
-        }
-      >
-        All Properties
-      </NavLink>
-      <NavLink
-        to="/dashboard"
-        className={({ isActive }) =>
-          `px-3 py-2 font-semibold transition-colors duration-200 ease-in-out rounded-md ${
-            isActive
-              ? "font-bold bg-white text-default rounded-md"
-              : "hover:bg-white hover:text-default hover:rounded-md"
-          }`
-        }
-      >
-        Dashboard
       </NavLink>
     </>
   );
@@ -66,23 +46,51 @@ const Navbar = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
+            {links}
+            {user && (
+              <>
+                <NavLink
+                  to="/allProperties"
+                  className={({ isActive }) =>
+                    `${
+                      isActive
+                        ? "font-bold underline"
+                        : "hover:underline font-medium"
+                    }`
+                  }
+                >
+                  All Properties
+                </NavLink>
+                <NavLink
+                  to="/dashboard"
+                  className={({ isActive }) =>
+                    `${
+                      isActive
+                        ? "font-bold underline"
+                        : "hover:underline font-medium"
+                    }`
+                  }
+                >
+                  Dashboard
+                </NavLink>
+              </>
+            )}
+            {user ? (
+              <Link className="hover:underline font-medium">Log out</Link>
+            ) : (
+              <NavLink
+                to="/login"
+                className={({ isActive }) =>
+                  `${
+                    isActive
+                      ? "font-bold underline"
+                      : "hover:underline font-medium"
+                  }`
+                }
+              >
+                Login
+              </NavLink>
+            )}
           </ul>
         </div>
         <Link className="flex items-center gap-1">
@@ -99,10 +107,79 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal items-center gap-4 px-1">
           {links}
+          {user && (
+            <>
+              <NavLink
+                to="/allProperties"
+                className={({ isActive }) =>
+                  `px-3 py-2 font-semibold transition-colors duration-200 ease-in-out rounded-md ${
+                    isActive
+                      ? "font-bold bg-white text-default rounded-md"
+                      : "hover:bg-white hover:text-default hover:rounded-md"
+                  }`
+                }
+              >
+                All Properties
+              </NavLink>
+              <NavLink
+                to="/dashboard"
+                className={({ isActive }) =>
+                  `px-3 py-2 font-semibold transition-colors duration-200 ease-in-out rounded-md ${
+                    isActive
+                      ? "font-bold bg-white text-default rounded-md"
+                      : "hover:bg-white hover:text-default hover:rounded-md"
+                  }`
+                }
+              >
+                Dashboard
+              </NavLink>
+            </>
+          )}
         </ul>
       </div>
-      <div className="navbar-end">
-        <a className="btn">Button</a>
+      <div className="navbar-end gap-4">
+        {user && user?.email ? (
+          <div className="dropdown dropdown-end">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <div className="w-14 rounded-full">
+                <img
+                  referrerPolicy="no-referrer"
+                  title={user?.displayName}
+                  src={user?.photoURL}
+                  className="w-full"
+                />
+              </div>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow text-zinc-950"
+            >
+              <li>
+                <a className="justify-between">{user?.displayName}</a>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          ""
+        )}
+        {user && user?.email ? (
+          <button onClick={logOut} className="btn hidden md:flex">
+            Log out
+          </button>
+        ) : (
+          <>
+            <Link to="/login" className="btn hidden md:flex">
+              Log in
+            </Link>
+            <Link to="/register" className="btn hidden md:flex">
+              Register
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );
