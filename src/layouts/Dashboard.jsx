@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   return (
@@ -36,6 +36,12 @@ const Dashboard = () => {
               <a>Manage Reviews</a>
             </li>
           </NavLink>
+          <div className="divider"></div>
+          <Link to="/">
+            <li>
+              <a>Back to Home</a>
+            </li>
+          </Link>
         </ul>
       </div>
     </div>
