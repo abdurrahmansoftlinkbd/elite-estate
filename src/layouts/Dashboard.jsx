@@ -1,10 +1,21 @@
+import { useContext, useEffect, useState } from "react";
 import { BsBuildingsFill } from "react-icons/bs";
 import { FaUsers, FaUserTie } from "react-icons/fa";
 import { MdReviews } from "react-icons/md";
 import { Link, NavLink, Outlet } from "react-router-dom";
+import useAxiosPublic from "../hooks/useAxiosPublic";
+import AuthContext from "../providers/AuthContext";
 
 const Dashboard = () => {
-  const isAdmin = true;
+  const { user } = useContext(AuthContext);
+  const [role, setRole] = useState({});
+  const axiosPublic = useAxiosPublic();
+
+  useEffect(() => {
+    axiosPublic.get(`/users/role/${user?.email}`).then((res) => {
+      setRole(res.data);
+    });
+  }, [axiosPublic, user?.email]);
 
   return (
     <div className="drawer font-inter lg:drawer-open">
@@ -21,7 +32,7 @@ const Dashboard = () => {
         ></label>
         <ul className="menu bg-default text-white font-bold min-h-full w-80 p-4">
           {/* Sidebar content here */}
-          {isAdmin ? (
+          {role === "admin" && (
             <>
               <NavLink to="/dashboard">
                 <li>
@@ -85,26 +96,78 @@ const Dashboard = () => {
                 </li>
               </Link>
             </>
-          ) : (
+          )}
+          {role === "agent" && (
             <>
-              <NavLink to="/dashboard/adminProfile">
+              <NavLink to="/dashboard/agentProfile">
                 <li>
-                  <a>Admin Profile</a>
+                  <a>
+                    <FaUserTie /> Agent Profile
+                  </a>
                 </li>
               </NavLink>
-              <NavLink to="/dashboard/manageProperties">
+              <NavLink
+                className={({ isActive }) =>
+                  `font-semibold transition-colors duration-200 ease-in-out rounded-md ${
+                    isActive
+                      ? "font-bold bg-white text-default rounded-md"
+                      : "hover:bg-white hover:text-default hover:rounded-md"
+                  }`
+                }
+                to="/dashboard/addProperty"
+              >
                 <li>
-                  <a>Manage Properties</a>
+                  <a>
+                    <BsBuildingsFill /> Add Property
+                  </a>
                 </li>
               </NavLink>
-              <NavLink to="/dashboard/manageUsers">
+              <NavLink
+                className={({ isActive }) =>
+                  `font-semibold transition-colors duration-200 ease-in-out rounded-md ${
+                    isActive
+                      ? "font-bold bg-white text-default rounded-md"
+                      : "hover:bg-white hover:text-default hover:rounded-md"
+                  }`
+                }
+                to="/dashboard/myAddedProperties"
+              >
                 <li>
-                  <a>Manage Users</a>
+                  <a>
+                    <FaUsers /> My Added Properties
+                  </a>
                 </li>
               </NavLink>
-              <NavLink to="/dashboard/manageReviews">
+              <NavLink
+                className={({ isActive }) =>
+                  `font-semibold transition-colors duration-200 ease-in-out rounded-md ${
+                    isActive
+                      ? "font-bold bg-white text-default rounded-md"
+                      : "hover:bg-white hover:text-default hover:rounded-md"
+                  }`
+                }
+                to="/dashboard/mySoldProperties"
+              >
                 <li>
-                  <a>Manage Reviews</a>
+                  <a>
+                    <MdReviews /> My Sold Properties
+                  </a>
+                </li>
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  `font-semibold transition-colors duration-200 ease-in-out rounded-md ${
+                    isActive
+                      ? "font-bold bg-white text-default rounded-md"
+                      : "hover:bg-white hover:text-default hover:rounded-md"
+                  }`
+                }
+                to="/dashboard/requestedProperties"
+              >
+                <li>
+                  <a>
+                    <MdReviews /> Requested Properties
+                  </a>
                 </li>
               </NavLink>
               <div className="divider"></div>
