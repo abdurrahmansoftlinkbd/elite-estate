@@ -1,4 +1,6 @@
-import { FaUserTie } from "react-icons/fa";
+import { BsBuildingsFill } from "react-icons/bs";
+import { FaUsers, FaUserTie } from "react-icons/fa";
+import { MdReviews } from "react-icons/md";
 import { Link, NavLink, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
@@ -23,22 +25,57 @@ const Dashboard = () => {
             <>
               <NavLink to="/dashboard">
                 <li>
-                  <a>Admin Profile</a>
+                  <a>
+                    <FaUserTie /> Admin Profile
+                  </a>
                 </li>
               </NavLink>
-              <NavLink to="/dashboard/manageProperties">
+              <NavLink
+                className={({ isActive }) =>
+                  `font-semibold transition-colors duration-200 ease-in-out rounded-md ${
+                    isActive
+                      ? "font-bold bg-white text-default rounded-md"
+                      : "hover:bg-white hover:text-default hover:rounded-md"
+                  }`
+                }
+                to="/dashboard/manageProperties"
+              >
                 <li>
-                  <a>Manage Properties</a>
+                  <a>
+                    <BsBuildingsFill /> Manage Properties
+                  </a>
                 </li>
               </NavLink>
-              <NavLink to="/dashboard/manageUsers">
+              <NavLink
+                className={({ isActive }) =>
+                  `font-semibold transition-colors duration-200 ease-in-out rounded-md ${
+                    isActive
+                      ? "font-bold bg-white text-default rounded-md"
+                      : "hover:bg-white hover:text-default hover:rounded-md"
+                  }`
+                }
+                to="/dashboard/manageUsers"
+              >
                 <li>
-                  <a>Manage Users</a>
+                  <a>
+                    <FaUsers /> Manage Users
+                  </a>
                 </li>
               </NavLink>
-              <NavLink to="/dashboard/manageReviews">
+              <NavLink
+                className={({ isActive }) =>
+                  `font-semibold transition-colors duration-200 ease-in-out rounded-md ${
+                    isActive
+                      ? "font-bold bg-white text-default rounded-md"
+                      : "hover:bg-white hover:text-default hover:rounded-md"
+                  }`
+                }
+                to="/dashboard/manageReviews"
+              >
                 <li>
-                  <a>Manage Reviews</a>
+                  <a>
+                    <MdReviews /> Manage Reviews
+                  </a>
                 </li>
               </NavLink>
               <div className="divider"></div>
@@ -52,9 +89,7 @@ const Dashboard = () => {
             <>
               <NavLink to="/dashboard/adminProfile">
                 <li>
-                  <a>
-                    <FaUserTie /> Admin Profile
-                  </a>
+                  <a>Admin Profile</a>
                 </li>
               </NavLink>
               <NavLink to="/dashboard/manageProperties">
