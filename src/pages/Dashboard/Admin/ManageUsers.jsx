@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
+import Loading from "../../Loading";
 
 const ManageUsers = () =>
   //   {
@@ -36,11 +38,41 @@ const ManageUsers = () =>
       });
     };
 
+    const handleDeleteUser = (user) => {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axiosSecure.delete(`/users/${user._id}`).then((res) => {
+            if (res.data.deletedCount > 0) {
+              refetch();
+              Swal.fire({
+                title: "Deleted!",
+                text: `${user.name} has been deleted`,
+                icon: "success",
+              });
+            }
+          });
+        }
+      });
+    };
+
+    if (isLoading) {
+      <Loading></Loading>;
+    }
+
     return (
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
             <tr>
+              <th>#</th>
               <th>Name</th>
               <th>Email</th>
               <th>Role</th>
@@ -48,8 +80,9 @@ const ManageUsers = () =>
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {users.map((user, index) => (
               <tr key={user._id}>
+                <td>{index + 1}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td className="capitalize">
@@ -84,7 +117,7 @@ const ManageUsers = () =>
                   )}
                   <button
                     className="btn btn-sm btn-error text-white"
-                    // onClick={() => handleDeleteUser(user.id)}
+                    onClick={() => handleDeleteUser(user)}
                   >
                     Delete User
                   </button>
