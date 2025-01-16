@@ -17,6 +17,8 @@ const Dashboard = () => {
     });
   }, [axiosPublic, user?.email]);
 
+  console.log(role.role);
+
   return (
     <div className="drawer font-inter lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -32,9 +34,9 @@ const Dashboard = () => {
         ></label>
         <ul className="menu bg-default text-white font-bold min-h-full w-80 p-4">
           {/* Sidebar content here */}
-          {role === "admin" && (
+          {role.role === "admin" && (
             <>
-              <NavLink to="/dashboard">
+              <NavLink to="/dashboard/adminProfile">
                 <li>
                   <a>
                     <FaUserTie /> Admin Profile
@@ -97,7 +99,7 @@ const Dashboard = () => {
               </Link>
             </>
           )}
-          {role === "agent" && (
+          {role.role === "agent" && (
             <>
               <NavLink to="/dashboard/agentProfile">
                 <li>
