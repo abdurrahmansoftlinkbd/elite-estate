@@ -1,10 +1,14 @@
 import { useContext, useEffect, useState } from "react";
-import { BsBuildingsFill } from "react-icons/bs";
-import { FaUsers, FaUserTie } from "react-icons/fa";
+import { BsBuildingFillAdd, BsBuildingsFill } from "react-icons/bs";
+import { FaBuilding, FaUserGraduate, FaUsers, FaUserTie } from "react-icons/fa";
 import { MdReviews } from "react-icons/md";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import AuthContext from "../providers/AuthContext";
+import {
+  FaBuildingCircleArrowRight,
+  FaBuildingCircleCheck,
+} from "react-icons/fa6";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -102,7 +106,7 @@ const Dashboard = () => {
               <NavLink to="/dashboard/agentProfile">
                 <li>
                   <a>
-                    <FaUserTie /> Agent Profile
+                    <FaUserGraduate /> Agent Profile
                   </a>
                 </li>
               </NavLink>
@@ -118,7 +122,7 @@ const Dashboard = () => {
               >
                 <li>
                   <a>
-                    <BsBuildingsFill /> Add Property
+                    <BsBuildingFillAdd /> Add Property
                   </a>
                 </li>
               </NavLink>
@@ -134,7 +138,7 @@ const Dashboard = () => {
               >
                 <li>
                   <a>
-                    <FaUsers /> My Added Properties
+                    <FaBuilding /> My Added Properties
                   </a>
                 </li>
               </NavLink>
@@ -150,7 +154,7 @@ const Dashboard = () => {
               >
                 <li>
                   <a>
-                    <MdReviews /> My Sold Properties
+                    <FaBuildingCircleCheck /> My Sold Properties
                   </a>
                 </li>
               </NavLink>
@@ -166,7 +170,7 @@ const Dashboard = () => {
               >
                 <li>
                   <a>
-                    <MdReviews /> Requested Properties
+                    <FaBuildingCircleArrowRight /> Requested Properties
                   </a>
                 </li>
               </NavLink>
