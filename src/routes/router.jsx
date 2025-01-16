@@ -9,6 +9,8 @@ import Dashboard from "../layouts/Dashboard";
 import AdminProfile from "../pages/Dashboard/Admin/AdminProfile";
 import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import AdminRoute from "./AdminRoute";
+import AgentRoute from "./AgentRoute";
+import AddProperty from "../pages/Dashboard/Agent/AddProperty";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +54,14 @@ const router = createBrowserRouter([
           <AdminRoute>
             <ManageUsers></ManageUsers>
           </AdminRoute>
+        ),
+      },
+      {
+        path: "addProperty",
+        element: (
+          <AgentRoute>
+            <AddProperty></AddProperty>
+          </AgentRoute>
         ),
       },
     ],

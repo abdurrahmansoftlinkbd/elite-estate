@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import AuthContext from "../providers/AuthContext";
 
-const AdminRoute = ({ children }) => {
+const AgentRoute = ({ children }) => {
   const { user } = useContext(AuthContext);
   const axiosPublic = useAxiosPublic();
   const { data: role = {}, isLoading } = useQuery({
@@ -18,12 +18,12 @@ const AdminRoute = ({ children }) => {
   });
 
   if (isLoading) return <Loading></Loading>;
-  if (role.role === "admin") return children;
+  if (role.role === "agent") return children;
   return <Navigate to="/dashboard" replace="true" />;
 };
 
-AdminRoute.propTypes = {
+AgentRoute.propTypes = {
   children: PropTypes.element,
 };
 
-export default AdminRoute;
+export default AgentRoute;

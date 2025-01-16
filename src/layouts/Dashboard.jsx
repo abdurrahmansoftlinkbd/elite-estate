@@ -17,8 +17,6 @@ const Dashboard = () => {
     });
   }, [axiosPublic, user?.email]);
 
-  console.log(role.role);
-
   return (
     <div className="drawer font-inter lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
