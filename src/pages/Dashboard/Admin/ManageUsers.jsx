@@ -63,6 +63,17 @@ const ManageUsers = () =>
       });
     };
 
+    const handleMakeAgent = (user) => {
+      axiosSecure.patch(`/users/agent/${user._id}`).then((res) => {
+        if (res.data.modifiedCount > 0) {
+          refetch();
+          toast.success(`${user?.name} is an Agent now.`);
+        } else {
+          toast.error(`${user?.name} is already an Agent`);
+        }
+      });
+    };
+
     if (isLoading) {
       <Loading></Loading>;
     }
@@ -85,9 +96,7 @@ const ManageUsers = () =>
                 <td>{index + 1}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
-                <td className="capitalize">
-                  {user?.role ? user?.role : "User"}
-                </td>
+                <td className="capitalize">{user?.role}</td>
                 <td className="flex space-x-2">
                   {user.role !== "fraud" ? (
                     <>
@@ -99,7 +108,7 @@ const ManageUsers = () =>
                       </button>
                       <button
                         className="btn btn-sm btn-accent text-white"
-                        // onClick={() => handleMakeAgent(user.id)}
+                        onClick={() => handleMakeAgent(user)}
                       >
                         Make Agent
                       </button>

@@ -12,7 +12,6 @@ import {
 } from "firebase/auth";
 import toast from "react-hot-toast";
 import auth from "../firebase/firebase.init";
-import axios from "axios";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const AuthProvider = ({ children }) => {
@@ -28,8 +27,9 @@ const AuthProvider = ({ children }) => {
         const userInfo = {
           email: result.user?.email,
           name: result.user?.displayName,
+          role: "User",
         };
-        axios.post("http://localhost:5000/users", userInfo).then((res) => {
+        axiosPublic.post("/users", userInfo).then((res) => {
           console.log(res.data);
         });
         setUser(user);

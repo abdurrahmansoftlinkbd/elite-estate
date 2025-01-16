@@ -4,11 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import AuthContext from "../providers/AuthContext";
 import axios from "axios";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 const Register = () => {
   const { createUser, setUser, updateUserProfile, handleGoogleSignIn } =
     useContext(AuthContext);
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -44,8 +46,9 @@ const Register = () => {
             const userInfo = {
               name: name,
               email: email,
+              role: "User",
             };
-            axios.post("http://localhost:5000/users", userInfo).then((res) => {
+            axiosPublic.post("/users", userInfo).then((res) => {
               if (res.data.insertedId) {
                 form.reset();
                 toast.success("Welcome to Elite Estate");
