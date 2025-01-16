@@ -11,6 +11,7 @@ import ManageUsers from "../pages/Dashboard/Admin/ManageUsers";
 import AdminRoute from "./AdminRoute";
 import AgentRoute from "./AgentRoute";
 import AddProperty from "../pages/Dashboard/Agent/AddProperty";
+import AgentProfile from "../pages/Dashboard/Agent/AgentProfile";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,14 @@ const router = createBrowserRouter([
           <AdminRoute>
             <ManageUsers></ManageUsers>
           </AdminRoute>
+        ),
+      },
+      {
+        path: "agentProfile",
+        element: (
+          <AgentRoute>
+            <AgentProfile></AgentProfile>
+          </AgentRoute>
         ),
       },
       {
