@@ -54,7 +54,10 @@ const PropertyAdvertisement = () => {
                         {property.priceRange.maximum.toLocaleString()}
                       </p>
                     </div>
-                    <Link className="btn bg-default border-default text-white hover:bg-dark hover:border-dark btn-sm btn-block">
+                    <Link
+                      to={`/property/${property._id}`}
+                      className="btn bg-default border-default text-white hover:bg-dark hover:border-dark btn-sm btn-block"
+                    >
                       View Details
                     </Link>
                   </div>
