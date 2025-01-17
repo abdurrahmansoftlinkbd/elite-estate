@@ -77,7 +77,6 @@ const AddProperty = () => {
             required
           />
         </div>
-        {/* Property Location */}
         <div className="form-control">
           <label className="label">
             <span className="label-text">
@@ -133,13 +132,11 @@ const AddProperty = () => {
             />
           </div>
         </div>
-        {/* Price Range */}
         <div className="form-control">
           <label className="label">
             <span className="label-text font-medium">Price Range</span>
           </label>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Minimum Price */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">
@@ -153,7 +150,6 @@ const AddProperty = () => {
                 required
               />
             </div>
-            {/* Maximum Price */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">
@@ -169,8 +165,6 @@ const AddProperty = () => {
             </div>
           </div>
         </div>
-
-        {/* Submit Button */}
         <button
           type="submit"
           className="btn bg-default border-default text-white hover:bg-dark hover:border-dark btn-block"
