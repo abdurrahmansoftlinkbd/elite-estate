@@ -15,6 +15,7 @@ import AgentProfile from "../pages/Dashboard/Agent/AgentProfile";
 import MyAddedProperties from "../pages/Dashboard/Agent/MyAddedProperties";
 import UpdateProperty from "../pages/Dashboard/Agent/UpdateProperty";
 import ManageProperties from "../pages/Dashboard/Admin/ManageProperties";
+import PropertyDetails from "../pages/PropertyDetails";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
+      },
+      {
+        path: "property/:id",
+        element: <PropertyDetails></PropertyDetails>,
       },
       {
         path: "login",
