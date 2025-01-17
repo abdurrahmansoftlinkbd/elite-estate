@@ -182,7 +182,13 @@ const UpdateProperty = () => {
           className="btn bg-default border-default text-white hover:bg-dark hover:border-dark btn-block"
           disabled={loading}
         >
-          Update Property
+          {loading ? (
+            <>
+              <span className="loading loading-spinner loading-xs"></span>
+            </>
+          ) : (
+            "Update Property"
+          )}
         </button>
       </form>
     </div>
