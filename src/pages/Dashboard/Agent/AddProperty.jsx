@@ -46,7 +46,7 @@ const AddProperty = () => {
       if (result.data.insertedId) {
         toast.success("Property Added Successfully!");
         form.reset();
-        navigate("/dashboard/myProperties");
+        navigate("/dashboard/myAddedProperties");
       }
     } catch (error) {
       toast.error(error.message || "Something went wrong!");
