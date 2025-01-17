@@ -12,6 +12,7 @@ import AdminRoute from "./AdminRoute";
 import AgentRoute from "./AgentRoute";
 import AddProperty from "../pages/Dashboard/Agent/AddProperty";
 import AgentProfile from "../pages/Dashboard/Agent/AgentProfile";
+import MyAddedProperties from "../pages/Dashboard/Agent/MyAddedProperties";
 
 const router = createBrowserRouter([
   {
@@ -70,6 +71,14 @@ const router = createBrowserRouter([
         element: (
           <AgentRoute>
             <AddProperty></AddProperty>
+          </AgentRoute>
+        ),
+      },
+      {
+        path: "myAddedProperties",
+        element: (
+          <AgentRoute>
+            <MyAddedProperties></MyAddedProperties>
           </AgentRoute>
         ),
       },
