@@ -1,18 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { useAuth } from "../hooks/useAuth";
+import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Loading from "../../Loading";
+import AuthContext from "../../../providers/AuthContext";
+import axios from "axios";
 
 const UpdateProperty = () => {
   const { id } = useParams();
-  const { user } = useAuth();
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
-  const axiosPublic = useAxiosPublic();
   const [loading, setLoading] = useState(false);
 
   const { data: property, isLoading } = useQuery({
@@ -23,51 +22,27 @@ const UpdateProperty = () => {
     },
   });
 
-  // Update property mutation
-  const { mutate: updateProperty } = useMutation({
-    mutationFn: async (updatedData) => {
-      const res = await axiosSecure.patch(`/properties/${id}`, updatedData);
-      return res.data;
-    },
-    onSuccess: () => {
-      toast.success("Property updated successfully");
-      navigate("/dashboard/my-properties");
-    },
-    onError: (error) => {
-      toast.error(error.message || "Failed to update property");
-      setLoading(false);
-    },
-  });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-
     const form = e.target;
     const title = form.title.value;
     const location = form.location.value;
     const minPrice = parseFloat(form.minPrice.value);
     const maxPrice = parseFloat(form.maxPrice.value);
-    const imageFile = form.image.files[0];
-
+    const image = form.image.files[0];
     try {
-      let imageUrl = property.image; // Keep existing image by default
-
-      // Upload new image if provided
-      if (imageFile) {
+      let imageUrl = property?.image;
+      if (image) {
         const formData = new FormData();
-        formData.append("image", imageFile);
-
-        const imageRes = await axiosPublic.post(
+        formData.append("image", image);
+        const { data } = await axios.post(
           `https://api.imgbb.com/1/upload?key=${
-            import.meta.env.VITE_IMGBB_API_KEY
+            import.meta.env.VITE_imgbb_api
           }`,
           formData
         );
-
-        if (imageRes.data.success) {
-          imageUrl = imageRes.data.data.url;
-        }
+        imageUrl = data.data.display_url;
       }
 
       const updatedData = {
@@ -78,11 +53,21 @@ const UpdateProperty = () => {
           maximum: maxPrice,
         },
         image: imageUrl,
-        status: "pending", // Reset to pending after update
+        status: "pending",
       };
-      updateProperty(updatedData);
+
+      const response = await axiosSecure.patch(
+        `/properties/${id}`,
+        updatedData
+      );
+
+      if (response.data.modifiedCount) {
+        toast.success("Property updated successfully");
+        navigate("/dashboard/myAddedProperties");
+      }
     } catch (error) {
-      toast.error(error);
+      toast.error(error?.message);
+    } finally {
       setLoading(false);
     }
   };
@@ -92,7 +77,7 @@ const UpdateProperty = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="container w-11/12 mx-auto my-16">
       <h2 className="text-3xl font-bold text-center mb-8">Update Property</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Property Image */}
@@ -102,19 +87,18 @@ const UpdateProperty = () => {
           </label>
           <div className="flex items-center space-x-4">
             <img
-              src={property.image}
-              alt="Current property"
-              className="w-32 h-32 object-cover rounded"
+              src={property?.image}
+              alt={property?.title}
+              className="w-24 h-24 object-cover rounded"
             />
             <input
               type="file"
               name="image"
               accept="image/*"
-              className="file-input file-input-bordered w-full"
+              className="file-input file-input-bordered file-input-accent w-full"
             />
           </div>
         </div>
-
         {/* Property Title */}
         <div className="form-control">
           <label className="label">
@@ -123,12 +107,11 @@ const UpdateProperty = () => {
           <input
             type="text"
             name="title"
-            defaultValue={property.title}
+            defaultValue={property?.title}
             className="input input-bordered"
             required
           />
         </div>
-
         {/* Property Location */}
         <div className="form-control">
           <label className="label">
@@ -137,12 +120,11 @@ const UpdateProperty = () => {
           <input
             type="text"
             name="location"
-            defaultValue={property.location}
+            defaultValue={property?.location}
             className="input input-bordered"
             required
           />
         </div>
-
         {/* Agent Info - Read Only */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="form-control">
@@ -156,7 +138,6 @@ const UpdateProperty = () => {
               readOnly
             />
           </div>
-
           <div className="form-control">
             <label className="label">
               <span className="label-text">Agent Email</span>
@@ -169,7 +150,6 @@ const UpdateProperty = () => {
             />
           </div>
         </div>
-
         {/* Price Range */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="form-control">
@@ -179,12 +159,11 @@ const UpdateProperty = () => {
             <input
               type="number"
               name="minPrice"
-              defaultValue={property.priceRange.minimum}
+              defaultValue={property?.priceRange?.minimum}
               className="input input-bordered"
               required
             />
           </div>
-
           <div className="form-control">
             <label className="label">
               <span className="label-text">Maximum Price</span>
@@ -192,17 +171,18 @@ const UpdateProperty = () => {
             <input
               type="number"
               name="maxPrice"
-              defaultValue={property.priceRange.maximum}
+              defaultValue={property?.priceRange?.maximum}
               className="input input-bordered"
               required
             />
           </div>
         </div>
-
         {/* Submit Button */}
         <button
           type="submit"
-          className={`btn btn-primary w-full ${loading ? "loading" : ""}`}
+          className={`btn bg-default border-default text-white hover:bg-dark hover:border-dark btn-block ${
+            loading ? "loading" : ""
+          }`}
           disabled={loading}
         >
           {loading ? "Updating..." : "Update Property"}
