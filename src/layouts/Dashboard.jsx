@@ -38,7 +38,16 @@ const Dashboard = () => {
           {/* Sidebar content here */}
           {role.role === "admin" && (
             <>
-              <NavLink to="/dashboard/adminProfile">
+              <NavLink
+                className={({ isActive }) =>
+                  `font-semibold transition-colors duration-200 ease-in-out rounded-md ${
+                    isActive
+                      ? "font-bold bg-white text-default rounded-md"
+                      : "hover:bg-white hover:text-default hover:rounded-md"
+                  }`
+                }
+                to="/dashboard/adminProfile"
+              >
                 <li>
                   <a>
                     <FaUserTie /> Admin Profile
