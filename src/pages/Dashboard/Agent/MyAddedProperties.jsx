@@ -57,8 +57,8 @@ const MyAddedProperties = () => {
   }
 
   return (
-    <div className="container w-11/12 mx-auto my-16">
-      <h2 className="text-3xl text-center font-bold uppercase mb-8">
+    <div className="container w-11/12 mx-auto my-16 font-inter">
+      <h2 className="text-3xl text-center font-bold font-playfair uppercase mb-8">
         My Added <span className="text-default">Properties</span>
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -87,7 +87,9 @@ const MyAddedProperties = () => {
             </figure>
             <div className="card-body p-4">
               {/* Property Info */}
-              <h3 className="card-title">{property?.title}</h3>
+              <h3 className="card-title font-playfair font-bold">
+                {property?.title}
+              </h3>
               <p className="text-gray-600">{property?.location}</p>
               {/* Price Range */}
               <div className="mt-1">
