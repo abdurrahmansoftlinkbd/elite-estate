@@ -14,7 +14,11 @@ const UpdateProperty = () => {
   const axiosSecure = useAxiosSecure();
   const [loading, setLoading] = useState(false);
 
-  const { data: property, isLoading } = useQuery({
+  const {
+    data: property,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["property", id],
     queryFn: async () => {
       const res = await axiosSecure.get(`/properties/${id}`);
@@ -62,7 +66,8 @@ const UpdateProperty = () => {
       );
 
       if (response.data.modifiedCount) {
-        toast.success("Property updated successfully");
+        toast.success(`${updatedData?.title} updated successfully!`);
+        refetch();
         navigate("/dashboard/myAddedProperties");
       }
     } catch (error) {
@@ -80,7 +85,6 @@ const UpdateProperty = () => {
     <div className="container w-11/12 mx-auto my-16">
       <h2 className="text-3xl font-bold text-center mb-8">Update Property</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Property Image */}
         <div className="form-control">
           <label className="label">
             <span className="label-text">Property Image</span>
@@ -99,7 +103,6 @@ const UpdateProperty = () => {
             />
           </div>
         </div>
-        {/* Property Title */}
         <div className="form-control">
           <label className="label">
             <span className="label-text">Property Title</span>
@@ -112,7 +115,6 @@ const UpdateProperty = () => {
             required
           />
         </div>
-        {/* Property Location */}
         <div className="form-control">
           <label className="label">
             <span className="label-text">Location</span>
@@ -125,7 +127,6 @@ const UpdateProperty = () => {
             required
           />
         </div>
-        {/* Agent Info - Read Only */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="form-control">
             <label className="label">
@@ -150,7 +151,6 @@ const UpdateProperty = () => {
             />
           </div>
         </div>
-        {/* Price Range */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="form-control">
             <label className="label">
@@ -177,15 +177,12 @@ const UpdateProperty = () => {
             />
           </div>
         </div>
-        {/* Submit Button */}
         <button
           type="submit"
-          className={`btn bg-default border-default text-white hover:bg-dark hover:border-dark btn-block ${
-            loading ? "loading" : ""
-          }`}
+          className="btn bg-default border-default text-white hover:bg-dark hover:border-dark btn-block"
           disabled={loading}
         >
-          {loading ? "Updating..." : "Update Property"}
+          Update Property
         </button>
       </form>
     </div>
