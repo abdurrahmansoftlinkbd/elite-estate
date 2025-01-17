@@ -60,8 +60,10 @@ const AddProperty = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h2 className="text-3xl font-bold text-center mb-8">Add New Property</h2>
+    <div className="container w-11/12 my-16 mx-auto font-inter">
+      <h2 className="text-3xl font-bold font-playfair text-center mb-8 uppercase">
+        Add New <span className="text-default">Property</span>
+      </h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Property Title */}
         <div className="form-control">
