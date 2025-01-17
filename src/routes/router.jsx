@@ -14,6 +14,7 @@ import AddProperty from "../pages/Dashboard/Agent/AddProperty";
 import AgentProfile from "../pages/Dashboard/Agent/AgentProfile";
 import MyAddedProperties from "../pages/Dashboard/Agent/MyAddedProperties";
 import UpdateProperty from "../pages/Dashboard/Agent/UpdateProperty";
+import ManageProperties from "../pages/Dashboard/Admin/ManageProperties";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AdminProfile></AdminProfile>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manageProperties",
+        element: (
+          <AdminRoute>
+            <ManageProperties></ManageProperties>
           </AdminRoute>
         ),
       },
