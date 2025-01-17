@@ -30,7 +30,7 @@ const ManageProperties = () => {
         }
       );
       if (res.data.modifiedCount) {
-        toast.success(`${property?.title} verified successfully`);
+        toast.success(`${property?.title} verified successfully!`);
         refetch();
       }
     } catch (error) {
@@ -44,14 +44,14 @@ const ManageProperties = () => {
     try {
       setProcessing(true);
       const res = await axiosSecure.patch(
-        `/properties/verify/${property._Id}`,
+        `/properties/verify/${property._id}`,
         {
           status: "rejected",
         }
       );
 
       if (res.data.modifiedCount) {
-        toast.success(`${property?.title} rejected`);
+        toast.success(`${property?.title} rejected!`);
         refetch();
       }
     } catch (error) {
