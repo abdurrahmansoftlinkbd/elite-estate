@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useContext } from "react";
 import AuthContext from "../../../providers/AuthContext";
 import Loading from "../../Loading";
+import Swal from "sweetalert2";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 const MyAddedProperties = () => {
   const { user } = useContext(AuthContext);
@@ -22,26 +24,32 @@ const MyAddedProperties = () => {
     },
   });
 
-  // Delete property mutation
-  const { mutate: deleteProperty } = useMutation({
-    mutationFn: async (id) => {
-      const res = await axiosSecure.delete(`/properties/${id}`);
-      return res.data;
-    },
-    onSuccess: () => {
-      toast.success("Property deleted successfully");
-      refetch();
-    },
-    onError: (error) => {
-      toast.error(error.message || "Failed to delete property");
-    },
-  });
-
-  // Handle delete
-  const handleDelete = (id) => {
-    if (window.confirm("Are you sure you want to delete this property?")) {
-      deleteProperty(id);
-    }
+  const handleDelete = async (property) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axiosSecure.delete(`/properties/${property._id}`);
+          if (res.data.deletedCount) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: `${property?.title} has been deleted.`,
+              icon: "success",
+            });
+          }
+        } catch (error) {
+          toast.error(error?.message);
+        }
+      }
+    });
   };
 
   if (isLoading) {
@@ -49,8 +57,10 @@ const MyAddedProperties = () => {
   }
 
   return (
-    <div className="container w-11/12 mx-auto">
-      <h2 className="text-3xl font-bold mb-8">My Added Properties</h2>
+    <div className="container w-11/12 mx-auto my-16">
+      <h2 className="text-3xl text-center font-bold uppercase mb-8">
+        My Added <span className="text-default">Properties</span>
+      </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {properties.map((property) => (
           <div key={property._id} className="card bg-base-100 shadow-xl">
@@ -112,7 +122,7 @@ const MyAddedProperties = () => {
                   </Link>
                 )}
                 <button
-                  onClick={() => handleDelete(property._id)}
+                  onClick={() => handleDelete(property)}
                   className="btn btn-error text-white btn-sm"
                 >
                   Delete
@@ -121,6 +131,16 @@ const MyAddedProperties = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="text-center mt-8">
+        <Link
+          to="/dashboard/addProperty"
+          target="_blank"
+          className="btn btn-lg bg-default border-default text-white hover:bg-dark hover:border-dark"
+        >
+          Add More Property <FaExternalLinkAlt />
+        </Link>
       </div>
 
       {properties.length === 0 && (
