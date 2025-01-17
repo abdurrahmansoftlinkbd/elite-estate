@@ -49,7 +49,7 @@ const AddProperty = () => {
         navigate("/dashboard/myAddedProperties");
       }
     } catch (error) {
-      toast.error(error.message || "Something went wrong!");
+      toast.error(error?.message);
     } finally {
       setLoading(false);
     }
