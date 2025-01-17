@@ -28,7 +28,6 @@ const AddProperty = () => {
       formData
     );
     const imageUrl = data.data.display_url;
-
     try {
       const propertyData = {
         title,
@@ -44,7 +43,7 @@ const AddProperty = () => {
       };
       const result = await axiosSecure.post("/properties", propertyData);
       if (result.data.insertedId) {
-        toast.success("Property Added Successfully!");
+        toast.success(`${propertyData?.title} Added Successfully!`);
         form.reset();
         navigate("/dashboard/myAddedProperties");
       }
@@ -62,13 +61,14 @@ const AddProperty = () => {
   return (
     <div className="container w-11/12 my-16 mx-auto font-inter">
       <h2 className="text-3xl font-bold font-playfair text-center mb-8 uppercase">
-        Add New <span className="text-default">Property</span>
+        Add <span className="text-default">Property</span>
       </h2>
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Property Title */}
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Property Title</span>
+            <span className="label-text">
+              Property Title <span className="text-error">*</span>
+            </span>
           </label>
           <input
             type="text"
@@ -80,7 +80,9 @@ const AddProperty = () => {
         {/* Property Location */}
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Location</span>
+            <span className="label-text">
+              Location <span className="text-error">*</span>
+            </span>
           </label>
           <input
             type="text"
@@ -89,10 +91,11 @@ const AddProperty = () => {
             required
           />
         </div>
-        {/* Property Image */}
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Property Image</span>
+            <span className="label-text">
+              Property Image <span className="text-error">*</span>
+            </span>
           </label>
           <input
             type="file"
@@ -102,11 +105,12 @@ const AddProperty = () => {
             required
           />
         </div>
-        {/* Agent Info - Read Only */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Agent Name</span>
+              <span className="label-text">
+                Agent Name <span className="text-error">*</span>
+              </span>
             </label>
             <input
               type="text"
@@ -117,7 +121,9 @@ const AddProperty = () => {
           </div>
           <div className="form-control">
             <label className="label">
-              <span className="label-text">Agent Email</span>
+              <span className="label-text">
+                Agent Email <span className="text-error">*</span>
+              </span>
             </label>
             <input
               type="email"
@@ -130,13 +136,15 @@ const AddProperty = () => {
         {/* Price Range */}
         <div className="form-control">
           <label className="label">
-            <span className="label-text">Price Range</span>
+            <span className="label-text font-medium">Price Range</span>
           </label>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Minimum Price */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Minimum Price</span>
+                <span className="label-text">
+                  Minimum Price <span className="text-error">*</span>
+                </span>
               </label>
               <input
                 type="number"
@@ -148,7 +156,9 @@ const AddProperty = () => {
             {/* Maximum Price */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Maximum Price</span>
+                <span className="label-text">
+                  Maximum Price <span className="text-error">*</span>
+                </span>
               </label>
               <input
                 type="number"
