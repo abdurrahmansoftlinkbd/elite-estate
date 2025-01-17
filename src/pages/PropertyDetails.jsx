@@ -16,7 +16,6 @@ const PropertyDetails = () => {
   const [rating, setRating] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Fetch property details
   const { data: property, isLoading } = useQuery({
     queryKey: ["property", id],
     queryFn: async () => {
@@ -25,7 +24,6 @@ const PropertyDetails = () => {
     },
   });
 
-  // Fetch reviews
   const { data: reviews = [] } = useQuery({
     queryKey: ["reviews", id],
     queryFn: async () => {
@@ -67,7 +65,6 @@ const PropertyDetails = () => {
       setShowReviewModal(false);
       setReviewText("");
       setRating(0);
-      // Refetch reviews after successful submission
       queryClient.invalidateQueries(["reviews", id]);
     } catch (error) {
       toast.error(error?.message);
@@ -81,59 +78,61 @@ const PropertyDetails = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container w-11/12 mx-auto my-16 font-inter">
       <div className="bg-white rounded-lg shadow-lg mb-8">
         <div className="p-6">
-          <h1 className="text-3xl font-bold mb-4">{property?.title}</h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="space-y-4">
+            <div>
               <img
                 src={property?.image}
                 alt={property?.title}
-                className="w-full h-[400px] object-cover rounded-lg"
+                className="w-full object-cover rounded-lg"
               />
-              <button
-                onClick={handleAddToWishlist}
-                className="btn btn-primary w-full flex items-center justify-center gap-2"
-              >
-                <FaHeart /> Add to Wishlist
-              </button>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-6 flex flex-col justify-center">
+              <h2 className="text-3xl font-bold font-playfair mb-2">
+                {property?.title}
+              </h2>
               <div>
-                <h3 className="text-xl font-semibold mb-2">Location</h3>
-                <p className="text-gray-600">{property.location}</p>
+                <h3 className="text-xl font-semibold mb-1">Location</h3>
+                <p className="text-gray-600">{property?.location}</p>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-2">Price Range</h3>
-                <p className="text-primary font-medium">
-                  ${property.priceRange.min} - ${property.priceRange.max}
+                <h3 className="text-xl font-semibold mb-1">Price Range</h3>
+                <p className="text-gray-600 font-medium">
+                  ${property.priceRange.minimum.toLocaleString()} - $
+                  {property.priceRange.maximum.toLocaleString()}
                 </p>
               </div>
               <div>
-                <h3 className="text-xl font-semibold mb-2">
+                <h3 className="text-xl font-semibold mb-1">
                   Agent Information
                 </h3>
                 <p className="text-gray-600">Name: {property.agentName}</p>
                 <p className="text-gray-600">Email: {property.agentEmail}</p>
               </div>
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={handleAddToWishlist}
+                  className="btn bg-default border-default text-white hover:bg-dark hover:border-dark"
+                >
+                  <FaHeart /> Add to Wishlist
+                </button>
+                <button
+                  className="btn bg-[#f4a261] border-[#f4a261] text-white hover:bg-[#ffb84d] hover:border-[#ffb84d]"
+                  onClick={() => setShowReviewModal(true)}
+                >
+                  Add Review
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Reviews Section */}
       <div className="mt-12">
-        <div className="flex justify-between items-center mb-6">
+        <div className="mb-6">
           <h2 className="text-2xl font-bold">Reviews</h2>
-          <button
-            className="btn btn-primary"
-            onClick={() => setShowReviewModal(true)}
-          >
-            Add Review
-          </button>
         </div>
-
         <div className="space-y-4">
           {reviews.map((review) => (
             <div key={review._id} className="bg-white rounded-lg shadow p-4">
@@ -160,8 +159,6 @@ const PropertyDetails = () => {
           )}
         </div>
       </div>
-
-      {/* Review Modal */}
       {showReviewModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-lg p-6 max-w-md w-full">
