@@ -18,6 +18,7 @@ import ManageProperties from "../pages/Dashboard/Admin/ManageProperties";
 import PropertyDetails from "../pages/PropertyDetails";
 import AllPropertiesPage from "../pages/AllPropertiesPage";
 import MyProfile from "../pages/Dashboard/User/MyProfile";
+import Wishlist from "../pages/Dashboard/User/Wishlist";
 
 const router = createBrowserRouter([
   {
@@ -124,6 +125,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyProfile></MyProfile>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "wishlist",
+        element: (
+          <PrivateRoute>
+            <Wishlist></Wishlist>
           </PrivateRoute>
         ),
       },
