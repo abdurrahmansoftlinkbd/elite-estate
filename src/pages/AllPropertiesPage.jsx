@@ -54,6 +54,11 @@ const AllPropertiesPage = () => {
                     </p>
                   </div>
                   <div className="flex items-center mb-1">
+                    <img
+                      src={property?.agentImage}
+                      alt={property?.agentName}
+                      className="w-10 h-10 rounded-full mr-3"
+                    />
                     <div>
                       <p className="font-semibold">{property?.agentName}</p>
                       <p className="text-sm text-gray-500">
