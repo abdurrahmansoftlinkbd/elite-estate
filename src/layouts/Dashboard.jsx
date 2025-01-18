@@ -200,7 +200,7 @@ const Dashboard = () => {
               </Link>
             </>
           )}
-          {role.role === "User" && (
+          {role.role === "user" && (
             <>
               <NavLink to="/dashboard/myProfile">
                 <li>
