@@ -46,7 +46,7 @@ const Register = () => {
             const userInfo = {
               name: name,
               email: email,
-              role: "User",
+              role: "user",
             };
             axiosPublic.post("/users", userInfo).then((res) => {
               if (res.data.insertedId) {
