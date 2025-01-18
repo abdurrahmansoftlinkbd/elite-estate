@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  useQuery,
+  //  useQueryClient
+} from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
-import ReactStars from "react-rating-stars-component";
+// import ReactStars from "react-rating-stars-component";
 import { FaHeart } from "react-icons/fa";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import Loading from "./Loading";
@@ -10,11 +13,11 @@ import Loading from "./Loading";
 const PropertyDetails = () => {
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   const [showReviewModal, setShowReviewModal] = useState(false);
-  const [reviewText, setReviewText] = useState("");
-  const [rating, setRating] = useState(0);
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  // const [reviewText, setReviewText] = useState("");
+  // const [rating, setRating] = useState(0);
+  // const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { data: property, isLoading } = useQuery({
     queryKey: ["property", id],
@@ -24,54 +27,55 @@ const PropertyDetails = () => {
     },
   });
 
-  const { data: reviews = [] } = useQuery({
-    queryKey: ["reviews", id],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/reviews/${id}`);
-      return res.data;
-    },
-  });
+  // const { data: reviews = [] } = useQuery({
+  //   queryKey: ["reviews", id],
+  //   queryFn: async () => {
+  //     const res = await axiosSecure.get(`/reviews/${id}`);
+  //     return res.data;
+  //   },
+  // });
 
   const handleAddToWishlist = async () => {
     try {
       await axiosSecure.post("/wishlist", {
         propertyId: id,
-        title: property.title,
-        image: property.image,
-        location: property.location,
-        agentName: property.agentName,
-        priceRange: property.priceRange,
+        title: property?.title,
+        image: property?.image,
+        location: property?.location,
+        agentName: property?.agentName,
+        status: property?.status,
+        priceRange: property?.priceRange,
       });
-      toast.success("Added to wishlist!");
+      toast.success(`${property?.title} Added to wishlist!`);
     } catch (error) {
       toast.error(error?.message);
     }
   };
 
-  const handleSubmitReview = async (e) => {
-    e.preventDefault();
-    if (!reviewText.trim() || rating === 0) {
-      toast.error("Please provide both review text and rating");
-      return;
-    }
-    setIsSubmitting(true);
-    try {
-      await axiosSecure.post(`/reviews`, {
-        propertyId: id,
-        review: reviewText,
-        rating: rating,
-      });
-      toast.success("Review added successfully!");
-      setShowReviewModal(false);
-      setReviewText("");
-      setRating(0);
-      queryClient.invalidateQueries(["reviews", id]);
-    } catch (error) {
-      toast.error(error?.message);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
+  // const handleSubmitReview = async (e) => {
+  //   e.preventDefault();
+  //   if (!reviewText.trim() || rating === 0) {
+  //     toast.error("Please provide both review text and rating");
+  //     return;
+  //   }
+  //   setIsSubmitting(true);
+  //   try {
+  //     await axiosSecure.post(`/reviews`, {
+  //       propertyId: id,
+  //       review: reviewText,
+  //       rating: rating,
+  //     });
+  //     toast.success("Review added successfully!");
+  //     setShowReviewModal(false);
+  //     setReviewText("");
+  //     setRating(0);
+  //     queryClient.invalidateQueries(["reviews", id]);
+  //   } catch (error) {
+  //     toast.error(error?.message);
+  //   } finally {
+  //     setIsSubmitting(false);
+  //   }
+  // };
 
   if (isLoading) {
     return <Loading></Loading>;
@@ -133,7 +137,7 @@ const PropertyDetails = () => {
         <div className="mb-6">
           <h2 className="text-2xl font-bold">Reviews</h2>
         </div>
-        <div className="space-y-4">
+        {/* <div className="space-y-4">
           {reviews.map((review) => (
             <div key={review._id} className="bg-white rounded-lg shadow p-4">
               <div className="mb-2">
@@ -157,7 +161,7 @@ const PropertyDetails = () => {
               No reviews yet. Be the first to review!
             </p>
           )}
-        </div>
+        </div> */}
       </div>
       {showReviewModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
@@ -171,7 +175,7 @@ const PropertyDetails = () => {
                 ✕
               </button>
             </div>
-            <form onSubmit={handleSubmitReview} className="space-y-4">
+            {/* <form onSubmit={handleSubmitReview} className="space-y-4">
               <div>
                 <ReactStars
                   count={5}
@@ -193,7 +197,7 @@ const PropertyDetails = () => {
               >
                 {isSubmitting ? "Submitting..." : "Submit Review"}
               </button>
-            </form>
+            </form> */}
           </div>
         </div>
       )}
