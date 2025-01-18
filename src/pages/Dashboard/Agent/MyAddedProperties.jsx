@@ -61,84 +61,7 @@ const MyAddedProperties = () => {
       <h2 className="text-3xl text-center font-bold font-playfair uppercase mb-8">
         My Added <span className="text-default">Properties</span>
       </h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {properties.map((property) => (
-          <div key={property._id} className="card bg-base-100 shadow-xl">
-            <figure className="relative h-40">
-              <img
-                src={property?.image}
-                alt={property?.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute top-2 right-2">
-                <span
-                  className={`badge text-white ${
-                    property?.status === "verified"
-                      ? "badge-success"
-                      : property?.status === "rejected"
-                      ? "badge-error"
-                      : "badge-warning"
-                  }`}
-                >
-                  {property?.status}
-                </span>
-              </div>
-            </figure>
-            <div className="card-body p-4">
-              <h3 className="card-title font-playfair font-bold">
-                {property?.title}
-              </h3>
-              <p className="text-gray-600">{property?.location}</p>
-              <div className="mt-1">
-                <p className="font-semibold">Price Range:</p>
-                <p className="text-gray-600">
-                  ${property.priceRange.minimum.toLocaleString()} - $
-                  {property.priceRange.maximum.toLocaleString()}
-                </p>
-              </div>
-              <div className="flex items-center mt-2">
-                <img
-                  src={property?.agentImage}
-                  alt={property?.agentName}
-                  className="w-10 h-10 rounded-full mr-3"
-                />
-                <div>
-                  <p className="font-semibold">{property?.agentName}</p>
-                  <p className="text-sm text-gray-500">
-                    {property?.agentEmail}
-                  </p>
-                </div>
-              </div>
-              <div className="card-actions justify-center mt-2">
-                {property.status !== "rejected" && (
-                  <Link
-                    to={`/dashboard/updateProperty/${property._id}`}
-                    className="btn bg-default border-default text-white hover:bg-dark hover:border-dark btn-sm"
-                  >
-                    Update
-                  </Link>
-                )}
-                <button
-                  onClick={() => handleDelete(property)}
-                  className="btn btn-error text-white btn-sm"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="text-center mt-8">
-        <Link
-          to="/dashboard/addProperty"
-          target="_blank"
-          className="btn btn-md bg-default border-default text-white hover:bg-dark hover:border-dark"
-        >
-          Add More Property <FaExternalLinkAlt />
-        </Link>
-      </div>
-      {properties.length === 0 && (
+      {properties.length === 0 ? (
         <div className="text-center mt-8">
           <p className="text-gray-600">No properties found</p>
           <Link
@@ -148,6 +71,86 @@ const MyAddedProperties = () => {
             Add Your First Property
           </Link>
         </div>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {properties.map((property) => (
+              <div key={property._id} className="card bg-base-100 shadow-xl">
+                <figure className="relative h-40">
+                  <img
+                    src={property?.image}
+                    alt={property?.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute top-2 right-2">
+                    <span
+                      className={`badge text-white ${
+                        property?.status === "verified"
+                          ? "badge-success"
+                          : property?.status === "rejected"
+                          ? "badge-error"
+                          : "badge-warning"
+                      }`}
+                    >
+                      {property?.status}
+                    </span>
+                  </div>
+                </figure>
+                <div className="card-body p-4">
+                  <h3 className="card-title font-playfair font-bold">
+                    {property?.title}
+                  </h3>
+                  <p className="text-gray-600">{property?.location}</p>
+                  <div className="mt-1">
+                    <p className="font-semibold">Price Range:</p>
+                    <p className="text-gray-600">
+                      ${property.priceRange.minimum.toLocaleString()} - $
+                      {property.priceRange.maximum.toLocaleString()}
+                    </p>
+                  </div>
+                  <div className="flex items-center mt-2">
+                    <img
+                      src={property?.agentImage}
+                      alt={property?.agentName}
+                      className="w-10 h-10 rounded-full mr-3"
+                    />
+                    <div>
+                      <p className="font-semibold">{property?.agentName}</p>
+                      <p className="text-sm text-gray-500">
+                        {property?.agentEmail}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="card-actions justify-center mt-2">
+                    {property.status !== "rejected" && (
+                      <Link
+                        to={`/dashboard/updateProperty/${property._id}`}
+                        className="btn bg-default border-default text-white hover:bg-dark hover:border-dark btn-sm"
+                      >
+                        Update
+                      </Link>
+                    )}
+                    <button
+                      onClick={() => handleDelete(property)}
+                      className="btn btn-error text-white btn-sm"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Link
+              to="/dashboard/addProperty"
+              target="_blank"
+              className="btn btn-md bg-default border-default text-white hover:bg-dark hover:border-dark"
+            >
+              Add More Property <FaExternalLinkAlt />
+            </Link>
+          </div>
+        </>
       )}
     </div>
   );
