@@ -139,6 +139,7 @@ const Register = () => {
             <button
               onClick={handleGoogleSignIn}
               className="btn bg-base-200 hover:bg-base-100"
+              disabled={loading}
             >
               <FcGoogle className="text-2xl" /> Signup with Google
             </button>
