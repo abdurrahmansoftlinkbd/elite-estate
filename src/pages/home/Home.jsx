@@ -11,7 +11,7 @@ const Home = () => {
       <section className="container w-11/12 mx-auto my-24 font-inter">
         <AllProperties></AllProperties>
       </section>
-      <section className="container w-11/12 mx-auto my-24">
+      <section className="container w-11/12 mx-auto mb-24">
         <News></News>
       </section>
     </>
