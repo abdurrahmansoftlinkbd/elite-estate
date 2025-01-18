@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
   useQuery,
@@ -9,8 +9,10 @@ import { toast } from "react-hot-toast";
 import { FaHeart } from "react-icons/fa";
 import useAxiosSecure from "../hooks/useAxiosSecure";
 import Loading from "./Loading";
+import AuthContext from "../providers/AuthContext";
 
 const PropertyDetails = () => {
+  const { user } = useContext(AuthContext);
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
   // const queryClient = useQueryClient();
@@ -45,6 +47,7 @@ const PropertyDetails = () => {
         agentName: property?.agentName,
         status: property?.status,
         priceRange: property?.priceRange,
+        userEmail: user?.email,
       });
       toast.success(`${property?.title} Added to wishlist!`);
     } catch (error) {
