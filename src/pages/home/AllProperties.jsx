@@ -3,7 +3,7 @@ import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { Link } from "react-router-dom";
 import { FaCheckCircle, FaExternalLinkAlt } from "react-icons/fa";
 
-const PropertyAdvertisement = () => {
+const AllProperties = () => {
   const axiosPublic = useAxiosPublic();
 
   const { data: properties = [] } = useQuery({
@@ -15,7 +15,7 @@ const PropertyAdvertisement = () => {
   });
 
   return (
-    <section className="container mx-auto">
+    <section>
       <h2 className="text-3xl font-bold font-playfair uppercase text-center mb-8">
         Featured <span className="text-default">Properties</span>
       </h2>
@@ -79,4 +79,4 @@ const PropertyAdvertisement = () => {
   );
 };
 
-export default PropertyAdvertisement;
+export default AllProperties;
