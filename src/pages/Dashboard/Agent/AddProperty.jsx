@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import AuthContext from "../../../providers/AuthContext";
-import Loading from "../../Loading";
 import axios from "axios";
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -54,10 +53,6 @@ const AddProperty = () => {
       setLoading(false);
     }
   };
-
-  if (loading) {
-    return <Loading></Loading>;
-  }
 
   return (
     <div className="container w-11/12 my-16 mx-auto font-inter">
@@ -169,8 +164,15 @@ const AddProperty = () => {
         <button
           type="submit"
           className="btn bg-default border-default text-white hover:bg-dark hover:border-dark btn-block"
+          disabled={loading}
         >
-          Add Property
+          {loading ? (
+            <>
+              <span className="loading loading-spinner loading-xs"></span>
+            </>
+          ) : (
+            "Add Property"
+          )}
         </button>
       </form>
     </div>
