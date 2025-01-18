@@ -29,7 +29,11 @@ const router = createBrowserRouter([
       },
       {
         path: "property/:id",
-        element: <PropertyDetails></PropertyDetails>,
+        element: (
+          <PrivateRoute>
+            <PropertyDetails></PropertyDetails>
+          </PrivateRoute>
+        ),
       },
       {
         path: "login",
