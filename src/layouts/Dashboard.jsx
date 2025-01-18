@@ -1,14 +1,23 @@
 import { useContext, useEffect, useState } from "react";
 import { BsBuildingFillAdd, BsBuildingsFill } from "react-icons/bs";
-import { FaBuilding, FaUserGraduate, FaUsers, FaUserTie } from "react-icons/fa";
-import { MdReviews } from "react-icons/md";
+import {
+  FaBuilding,
+  FaHome,
+  FaUser,
+  FaUserGraduate,
+  FaUsers,
+  FaUserTie,
+} from "react-icons/fa";
+import { MdRateReview, MdReviews } from "react-icons/md";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import AuthContext from "../providers/AuthContext";
 import {
   FaBuildingCircleArrowRight,
   FaBuildingCircleCheck,
+  FaMoneyCheckDollar,
 } from "react-icons/fa6";
+import { SiWish } from "react-icons/si";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -187,6 +196,73 @@ const Dashboard = () => {
               <Link to="/">
                 <li>
                   <a>Back to Home</a>
+                </li>
+              </Link>
+            </>
+          )}
+          {role.role === "User" && (
+            <>
+              <NavLink to="/dashboard/myProfile">
+                <li>
+                  <a>
+                    <FaUser /> My Profile
+                  </a>
+                </li>
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  `font-semibold transition-colors duration-200 ease-in-out rounded-md ${
+                    isActive
+                      ? "font-bold bg-white text-default rounded-md"
+                      : "hover:bg-white hover:text-default hover:rounded-md"
+                  }`
+                }
+                to="/dashboard/wishlist"
+              >
+                <li>
+                  <a>
+                    <SiWish /> Wishlist
+                  </a>
+                </li>
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  `font-semibold transition-colors duration-200 ease-in-out rounded-md ${
+                    isActive
+                      ? "font-bold bg-white text-default rounded-md"
+                      : "hover:bg-white hover:text-default hover:rounded-md"
+                  }`
+                }
+                to="/dashboard/propertyBought"
+              >
+                <li>
+                  <a>
+                    <FaMoneyCheckDollar /> Property Bought
+                  </a>
+                </li>
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  `font-semibold transition-colors duration-200 ease-in-out rounded-md ${
+                    isActive
+                      ? "font-bold bg-white text-default rounded-md"
+                      : "hover:bg-white hover:text-default hover:rounded-md"
+                  }`
+                }
+                to="/dashboard/myReviews"
+              >
+                <li>
+                  <a>
+                    <MdRateReview /> My Reviews
+                  </a>
+                </li>
+              </NavLink>
+              <div className="divider"></div>
+              <Link to="/">
+                <li>
+                  <a>
+                    <FaHome /> Back to Home
+                  </a>
                 </li>
               </Link>
             </>
