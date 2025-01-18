@@ -64,7 +64,6 @@ const MyAddedProperties = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {properties.map((property) => (
           <div key={property._id} className="card bg-base-100 shadow-xl">
-            {/* Property Image */}
             <figure className="relative h-40">
               <img
                 src={property?.image}
@@ -73,7 +72,7 @@ const MyAddedProperties = () => {
               />
               <div className="absolute top-2 right-2">
                 <span
-                  className={`badge ${
+                  className={`badge text-white ${
                     property?.status === "verified"
                       ? "badge-success"
                       : property?.status === "rejected"
@@ -86,12 +85,10 @@ const MyAddedProperties = () => {
               </div>
             </figure>
             <div className="card-body p-4">
-              {/* Property Info */}
               <h3 className="card-title font-playfair font-bold">
                 {property?.title}
               </h3>
               <p className="text-gray-600">{property?.location}</p>
-              {/* Price Range */}
               <div className="mt-1">
                 <p className="font-semibold">Price Range:</p>
                 <p className="text-gray-600">
@@ -99,7 +96,6 @@ const MyAddedProperties = () => {
                   {property.priceRange.maximum.toLocaleString()}
                 </p>
               </div>
-              {/* Agent Info */}
               <div className="flex items-center mt-2">
                 <img
                   src={user?.photoURL}
@@ -113,7 +109,6 @@ const MyAddedProperties = () => {
                   </p>
                 </div>
               </div>
-              {/* Action Buttons */}
               <div className="card-actions justify-center mt-2">
                 {property.status !== "rejected" && (
                   <Link
@@ -134,17 +129,15 @@ const MyAddedProperties = () => {
           </div>
         ))}
       </div>
-
       <div className="text-center mt-8">
         <Link
           to="/dashboard/addProperty"
           target="_blank"
-          className="btn btn-lg bg-default border-default text-white hover:bg-dark hover:border-dark"
+          className="btn btn-md bg-default border-default text-white hover:bg-dark hover:border-dark"
         >
           Add More Property <FaExternalLinkAlt />
         </Link>
       </div>
-
       {properties.length === 0 && (
         <div className="text-center mt-8">
           <p className="text-gray-600">No properties found</p>
