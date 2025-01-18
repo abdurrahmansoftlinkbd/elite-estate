@@ -27,7 +27,7 @@ const AuthProvider = ({ children }) => {
         const userInfo = {
           email: result.user?.email,
           name: result.user?.displayName,
-          role: "User",
+          role: "user",
         };
         axiosPublic.post("/users", userInfo).then((res) => {
           console.log(res.data);
@@ -71,7 +71,7 @@ const AuthProvider = ({ children }) => {
     return () => {
       unSubscribe();
     };
-  }, []);
+  }, [axiosPublic]);
 
   const logOut = () => {
     setLoading(true);
