@@ -37,6 +37,7 @@ const AddProperty = () => {
           maximum: maxPrice,
         },
         image: imageUrl,
+        agentImage: user?.photoURL,
         agentName: user?.displayName,
         agentEmail: user?.email,
         status: "pending",
