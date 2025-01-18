@@ -98,7 +98,7 @@ const MyAddedProperties = () => {
               </div>
               <div className="flex items-center mt-2">
                 <img
-                  src={user?.photoURL}
+                  src={property?.agentImage}
                   alt={property?.agentName}
                   className="w-10 h-10 rounded-full mr-3"
                 />
