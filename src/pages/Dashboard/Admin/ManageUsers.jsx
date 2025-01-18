@@ -4,81 +4,106 @@ import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import Loading from "../../Loading";
 
-const ManageUsers = () =>
-  //   {
-  //   users,
-  //   handleMakeAdmin,
-  //   handleMakeAgent,
-  //   handleMarkFraud,
-  //   handleDeleteUser,
-  //   }
-  {
-    const axiosSecure = useAxiosSecure();
+const ManageUsers = () => {
+  const axiosSecure = useAxiosSecure();
 
-    const {
-      data: users = [],
-      isLoading,
-      refetch,
-    } = useQuery({
-      queryKey: ["users"],
-      queryFn: async () => {
-        const res = await axiosSecure.get("/users");
-        return res.data;
-      },
+  const {
+    data: users = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/users");
+      return res.data;
+    },
+  });
+
+  const handleMakeAdmin = (user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Promoting this user to admin grants them additional privileges. This action cannot be undone!",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, make admin",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
+          if (res.data.modifiedCount > 0) {
+            Swal.fire({
+              title: "Success!",
+              text: `${user?.name} is an Admin now.`,
+              icon: "success",
+            });
+            refetch();
+          } else {
+            toast.error(`${user?.name} is already an Admin`);
+          }
+        });
+      }
     });
+  };
 
-    const handleMakeAdmin = (user) => {
-      axiosSecure.patch(`/users/admin/${user._id}`).then((res) => {
-        if (res.data.modifiedCount > 0) {
-          refetch();
-          toast.success(`${user.name} is an Admin now.`);
-        } else {
-          toast.error(`${user.name} is already an Admin`);
-        }
-      });
-    };
+  const handleDeleteUser = (user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/users/${user._id}`).then((res) => {
+          if (res.data.deletedCount > 0) {
+            Swal.fire({
+              title: "Deleted!",
+              text: `${user.name} has been deleted`,
+              icon: "success",
+            });
+            refetch();
+          }
+        });
+      }
+    });
+  };
 
-    const handleDeleteUser = (user) => {
-      Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          axiosSecure.delete(`/users/${user._id}`).then((res) => {
-            if (res.data.deletedCount > 0) {
-              refetch();
-              Swal.fire({
-                title: "Deleted!",
-                text: `${user.name} has been deleted`,
-                icon: "success",
-              });
-            }
-          });
-        }
-      });
-    };
+  const handleMakeAgent = (user) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Promoting this user to agent grants them additional privileges. This action cannot be undone!",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, make agent",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/users/agent/${user._id}`).then((res) => {
+          if (res.data.modifiedCount > 0) {
+            Swal.fire({
+              title: "Success!",
+              text: `${user?.name} is an Agent now.`,
+              icon: "success",
+            });
+            refetch();
+          } else {
+            toast.error(`${user?.name} is already an Agent`);
+          }
+        });
+      }
+    });
+  };
 
-    const handleMakeAgent = (user) => {
-      axiosSecure.patch(`/users/agent/${user._id}`).then((res) => {
-        if (res.data.modifiedCount > 0) {
-          refetch();
-          toast.success(`${user?.name} is an Agent now.`);
-        } else {
-          toast.error(`${user?.name} is already an Agent`);
-        }
-      });
-    };
+  if (isLoading) {
+    <Loading></Loading>;
+  }
 
-    if (isLoading) {
-      <Loading></Loading>;
-    }
-
-    return (
+  return (
+    <section className="container w-11/12 mx-auto">
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
@@ -136,7 +161,8 @@ const ManageUsers = () =>
           </tbody>
         </table>
       </div>
-    );
-  };
+    </section>
+  );
+};
 
 export default ManageUsers;
