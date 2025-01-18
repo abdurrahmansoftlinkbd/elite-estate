@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -11,9 +11,11 @@ const Register = () => {
     useContext(AuthContext);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
+  const [loading, setLoading] = useState(false);
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
@@ -23,44 +25,42 @@ const Register = () => {
       toast.error(
         "Password must contain at least one uppercase letter and one special character."
       );
+      setLoading(false);
       return;
     }
     const image = form.image.files[0];
     const formData = new FormData();
     formData.append("image", image);
-    const { data } = await axios.post(
-      `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_api}`,
-      formData
-    );
-    const imageUrl = data.data.display_url;
+    try {
+      const { data } = await axios.post(
+        `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_imgbb_api}`,
+        formData
+      );
+      const imageUrl = data.data.display_url;
 
-    createUser(email, password)
-      .then((result) => {
-        const user = result.user;
-        setUser(user);
-        updateUserProfile({
-          displayName: name,
-          photoURL: imageUrl,
-        })
-          .then(() => {
-            const userInfo = {
-              name: name,
-              email: email,
-              role: "user",
-            };
-            axiosPublic.post("/users", userInfo).then((res) => {
-              if (res.data.insertedId) {
-                form.reset();
-                toast.success("Welcome to Elite Estate");
-                navigate("/");
-              }
-            });
-          })
-          .catch((error) => {
-            toast.error(`Unable to update profile. ${error}`);
-          });
-      })
-      .catch((error) => toast.error(`${error.code}`));
+      const result = await createUser(email, password);
+      const user = result.user;
+      setUser(user);
+      await updateUserProfile({
+        displayName: name,
+        photoURL: imageUrl,
+      });
+      const userInfo = {
+        name: name,
+        email: email,
+        role: "user",
+      };
+      const res = await axiosPublic.post("/users", userInfo);
+      if (res.data.insertedId) {
+        form.reset();
+        toast.success("Welcome to Elite Estate");
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error(error?.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -122,8 +122,18 @@ const Register = () => {
             </div>
           </div>
           <div className="form-control mt-6">
-            <button className="btn bg-default text-white hover:bg-light hover:border-light">
-              Register
+            <button
+              className="btn bg-default text-white hover:bg-light hover:border-light"
+              type="submit"
+              disabled={loading}
+            >
+              {loading ? (
+                <>
+                  <span className="loading loading-spinner loading-xs"></span>
+                </>
+              ) : (
+                "Register"
+              )}
             </button>
             <div className="divider">OR</div>
             <button
