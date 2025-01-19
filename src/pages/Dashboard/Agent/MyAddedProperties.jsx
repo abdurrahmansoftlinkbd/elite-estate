@@ -37,7 +37,10 @@ const MyAddedProperties = () => {
       if (result.isConfirmed) {
         try {
           const res = await axiosSecure.delete(`/properties/${property._id}`);
-          if (res.data.deletedCount) {
+          if (
+            res.data.propertyResult.deletedCount > 0 ||
+            res.data.wishlistResult.deletedCount > 0
+          ) {
             refetch();
             Swal.fire({
               title: "Deleted!",
