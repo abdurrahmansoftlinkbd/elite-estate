@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 // import { useNavigate } from "react-router-dom";
-// import { toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { FaCheckCircle } from "react-icons/fa";
 import { useContext } from "react";
 import AuthContext from "../../../providers/AuthContext";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../Loading";
+import Swal from "sweetalert2";
 
 const Wishlist = () => {
   const { user } = useContext(AuthContext);
@@ -15,7 +16,7 @@ const Wishlist = () => {
   const {
     data: wishlistItems = [],
     isLoading,
-    //  refetch
+    refetch,
   } = useQuery({
     queryKey: ["wishlist"],
     queryFn: async () => {
@@ -24,15 +25,33 @@ const Wishlist = () => {
     },
   });
 
-  //   const handleRemoveFromWishlist = async (id) => {
-  //     try {
-  //       await axiosSecure.delete(`/wishlist/${id}`);
-  //       toast.success("Removed from wishlist");
-  //       refetch();
-  //     } catch (error) {
-  //       toast.error("Failed to remove from wishlist");
-  //     }
-  //   };
+  const handleRemoveFromWishlist = async (item) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axiosSecure.delete(`/wishlist/${item._id}`);
+          if (res.data.deletedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Deleted!",
+              text: `${item?.title} has been deleted.`,
+              icon: "success",
+            });
+          }
+        } catch (error) {
+          toast.error(error?.message);
+        }
+      }
+    });
+  };
 
   //   const handleMakeOffer = (property) => {
   //     navigate(`/make-offer/${property._id}`, { state: { property } });
@@ -95,7 +114,7 @@ const Wishlist = () => {
                       Make Offer
                     </button>
                     <button
-                      // onClick={() => handleRemoveFromWishlist(item._id)}
+                      onClick={() => handleRemoveFromWishlist(item)}
                       className="btn btn-sm btn-error text-white"
                     >
                       Delete
