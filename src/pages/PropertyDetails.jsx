@@ -45,6 +45,7 @@ const PropertyDetails = () => {
         image: property?.image,
         location: property?.location,
         agentName: property?.agentName,
+        agentImage: property?.agentImage,
         status: property?.status,
         priceRange: property?.priceRange,
         userEmail: user?.email,
