@@ -21,7 +21,20 @@ const Wishlist = () => {
     queryKey: ["wishlist"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/wishlist/${user?.email}`);
-      return res.data;
+      const offersRes = await axiosSecure.get(`/offers/${user?.email}`);
+      const offers = offersRes.data;
+      const itemsWithOfferStatus = res.data.map((item) => {
+        const pendingOffer = offers.find(
+          (offer) =>
+            offer?.propertyId === item._id.toString() &&
+            offer?.status === "pending"
+        );
+        return {
+          ...item,
+          hasPendingOffer: !!pendingOffer,
+        };
+      });
+      return itemsWithOfferStatus;
     },
   });
 
@@ -110,9 +123,11 @@ const Wishlist = () => {
                     <button
                       onClick={() => handleMakeOffer(item)}
                       className="btn btn-sm bg-default border-default text-white hover:bg-dark hover:border-dark"
+                      disabled={item?.hasPendingOffer}
                     >
-                      Make Offer
+                      {item?.hasPendingOffer ? "Pending" : "Make Offer"}
                     </button>
+
                     <button
                       onClick={() => handleRemoveFromWishlist(item)}
                       className="btn btn-sm btn-error text-white"
