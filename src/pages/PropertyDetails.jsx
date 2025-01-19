@@ -116,8 +116,19 @@ const PropertyDetails = () => {
                 <h3 className="text-xl font-semibold mb-1">
                   Agent Information
                 </h3>
-                <p className="text-gray-600">Name: {property.agentName}</p>
-                <p className="text-gray-600">Email: {property.agentEmail}</p>
+                <div className="flex items-center mt-2">
+                  <img
+                    src={property?.agentImage}
+                    alt={property?.agentName}
+                    className="w-10 h-10 rounded-full mr-3"
+                  />
+                  <div>
+                    <p className="font-semibold">{property?.agentName}</p>
+                    <p className="text-sm text-gray-500">
+                      {property?.agentEmail}
+                    </p>
+                  </div>
+                </div>
               </div>
               <div className="flex items-center gap-4">
                 <button
