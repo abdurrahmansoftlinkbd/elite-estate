@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 import { FaCheckCircle } from "react-icons/fa";
 import { useContext } from "react";
@@ -10,7 +10,7 @@ import Swal from "sweetalert2";
 
 const Wishlist = () => {
   const { user } = useContext(AuthContext);
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
   const axiosSecure = useAxiosSecure();
 
   const {
@@ -53,9 +53,9 @@ const Wishlist = () => {
     });
   };
 
-  //   const handleMakeOffer = (property) => {
-  //     navigate(`/make-offer/${property._id}`, { state: { property } });
-  //   };
+  const handleMakeOffer = (property) => {
+    navigate(`/dashboard/makeOffer/${property._id}`, { state: { property } });
+  };
 
   return (
     <div className="container w-11/12 mx-auto my-16 font-inter">
@@ -108,7 +108,7 @@ const Wishlist = () => {
                   </div>
                   <div className="card-actions justify-center mt-1">
                     <button
-                      // onClick={() => handleMakeOffer(item)}
+                      onClick={() => handleMakeOffer(item)}
                       className="btn btn-sm bg-default border-default text-white hover:bg-dark hover:border-dark"
                     >
                       Make Offer
