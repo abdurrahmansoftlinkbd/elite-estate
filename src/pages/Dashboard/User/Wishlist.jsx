@@ -37,8 +37,10 @@ const Wishlist = () => {
   //   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h2 className="text-3xl font-bold mb-8">My Wishlist</h2>
+    <div className="container w-11/12 mx-auto my-16">
+      <h2 className="text-3xl text-center font-bold font-playfair mb-8 uppercase">
+        My <span className="text-default">Wishlist</span>
+      </h2>
       {wishlistItems.length === 0 ? (
         <div className="text-center py-8">
           <p className="text-gray-500">No properties in your wishlist yet.</p>
@@ -47,19 +49,19 @@ const Wishlist = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {wishlistItems.map((item) => (
             <div key={item._id} className="card bg-base-100 shadow-xl">
-              <figure className="relative">
+              <figure className="relative h-40">
                 <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-48 object-cover"
+                  src={item?.image}
+                  alt={item?.title}
+                  className="w-full h-full object-cover"
                 />
-                {item.status === "verified" && (
+                {item?.status === "verified" && (
                   <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded-full flex items-center">
                     <FaCheck className="mr-1" /> Verified
                   </div>
                 )}
               </figure>
-              <div className="card-body">
+              <div className="card-body p-4">
                 <h3 className="card-title">{item.title}</h3>
                 <p className="text-gray-600">{item.location}</p>
                 <div className="flex items-center gap-2 mt-2">
