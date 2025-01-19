@@ -5,6 +5,7 @@ import { FaCheck, FaTrash } from "react-icons/fa";
 import { useContext } from "react";
 import AuthContext from "../../../providers/AuthContext";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import Loading from "../../Loading";
 
 const Wishlist = () => {
   const { user } = useContext(AuthContext);
@@ -13,6 +14,7 @@ const Wishlist = () => {
 
   const {
     data: wishlistItems = [],
+    isLoading,
     //  refetch
   } = useQuery({
     queryKey: ["wishlist"],
@@ -41,7 +43,9 @@ const Wishlist = () => {
       <h2 className="text-3xl text-center font-bold font-playfair mb-8 uppercase">
         My <span className="text-default">Wishlist</span>
       </h2>
-      {wishlistItems.length === 0 ? (
+      {isLoading ? (
+        <Loading></Loading>
+      ) : wishlistItems.length === 0 ? (
         <div className="text-center py-8">
           <p className="text-gray-500">No properties in your wishlist yet.</p>
         </div>
