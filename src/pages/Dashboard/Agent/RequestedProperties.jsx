@@ -22,19 +22,20 @@ const RequestedProperties = () => {
     },
   });
 
-  //   const handleAcceptOffer = async (offerId, propertyId) => {
-  //     try {
-  //       const res = await axiosSecure.patch(`/accept-offer/${offerId}`, {
-  //         propertyId,
-  //       });
-  //       if (res.data.success) {
-  //         toast.success("Offer accepted successfully");
-  //         refetch();
-  //       }
-  //     } catch (error) {
-  //       toast.error(error?.message || "Error accepting offer");
-  //     }
-  //   };
+  const handleAcceptOffer = async (offerId, propertyId) => {
+    try {
+      const res = await axiosSecure.patch(`/acceptOffer/${offerId}`, {
+        propertyId,
+      });
+      console.log(res, propertyId);
+      if (res.data.success) {
+        refetch();
+        toast.success("Offer accepted successfully");
+      }
+    } catch (error) {
+      toast.error(error?.message);
+    }
+  };
 
   const handleRejectOffer = async (offer) => {
     Swal.fire({
@@ -97,7 +98,7 @@ const RequestedProperties = () => {
                 <td>${offer.offerAmount.toLocaleString()}</td>
                 <td>
                   <span
-                    className={`badge text-white ${
+                    className={`badge text-white capitalize ${
                       offer.status === "pending"
                         ? "badge-warning"
                         : offer.status === "accepted"
@@ -112,9 +113,9 @@ const RequestedProperties = () => {
                   {offer.status === "pending" && (
                     <div className="flex gap-2">
                       <button
-                        // onClick={() =>
-                        //   handleAcceptOffer(offer._id, offer.propertyId)
-                        // }
+                        onClick={() =>
+                          handleAcceptOffer(offer._id, offer.propertyId)
+                        }
                         className="btn btn-xs btn-success text-white"
                       >
                         Accept

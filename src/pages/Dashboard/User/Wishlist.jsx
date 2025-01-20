@@ -26,8 +26,10 @@ const Wishlist = () => {
       const itemsWithOfferStatus = res.data.map((item) => {
         const pendingOffer = offers.find(
           (offer) =>
-            offer?.propertyId === item._id.toString() &&
-            offer?.status === "pending"
+            offer?.propertyId === item?.propertyId &&
+            (offer?.status === "pending" ||
+              offer?.status === "rejected" ||
+              offer?.status === "accepted")
         );
         return {
           ...item,
@@ -125,7 +127,7 @@ const Wishlist = () => {
                       className="btn btn-sm bg-default border-default text-white hover:bg-dark hover:border-dark"
                       disabled={item?.hasPendingOffer}
                     >
-                      {item?.hasPendingOffer ? "Pending" : "Make Offer"}
+                      Make Offer
                     </button>
 
                     <button
