@@ -10,13 +10,13 @@ Check out the live project: [Elite Estate](https://b10-a12-elite-estate.web.app)
 
 ### Admin Access
 
-- Email: [abdullah@gmail.com]
-- Password: [Abdullah1@]
+- Email: abdullah@gmail.com
+- Password: Abdullah1@
 
 ### Agent Access
 
-- Email: [osman@gmail.com]
-- Password: [Osman1@]
+- Email: osman@gmail.com
+- Password: Osman1@
 
 ## Key Features
 
