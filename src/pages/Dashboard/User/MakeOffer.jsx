@@ -58,6 +58,7 @@ const MakeOffer = () => {
         propertyId: property._id,
         propertyTitle: property?.title,
         propertyLocation: property?.location,
+        propertyImage: property?.image,
         agentName: property?.agentName,
         agentEmail: property?.agentEmail,
         offerAmount: amount,

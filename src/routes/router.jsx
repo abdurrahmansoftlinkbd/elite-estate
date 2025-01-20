@@ -20,6 +20,7 @@ import AllPropertiesPage from "../pages/AllPropertiesPage";
 import MyProfile from "../pages/Dashboard/User/MyProfile";
 import Wishlist from "../pages/Dashboard/User/Wishlist";
 import MakeOffer from "../pages/Dashboard/User/MakeOffer";
+import PropertyBought from "../pages/Dashboard/User/PropertyBought";
 
 const router = createBrowserRouter([
   {
@@ -142,6 +143,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MakeOffer></MakeOffer>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "propertyBought",
+        element: (
+          <PrivateRoute>
+            <PropertyBought></PropertyBought>
           </PrivateRoute>
         ),
       },
