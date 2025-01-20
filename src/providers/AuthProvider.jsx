@@ -30,7 +30,9 @@ const AuthProvider = ({ children }) => {
           role: "user",
         };
         axiosPublic.post("/users", userInfo).then((res) => {
-          console.log(res.data);
+          if (res) {
+            toast.success("Welcome back!");
+          }
         });
         setUser(user);
       })
