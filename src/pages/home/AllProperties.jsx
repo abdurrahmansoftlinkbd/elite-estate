@@ -68,7 +68,7 @@ const AllProperties = () => {
       </div>
       <div className="text-center mt-8">
         <Link
-          to="/dashboard/addProperty"
+          to="/allProperties"
           target="_blank"
           className="btn btn-md bg-default border-default text-white hover:bg-dark hover:border-dark"
         >
