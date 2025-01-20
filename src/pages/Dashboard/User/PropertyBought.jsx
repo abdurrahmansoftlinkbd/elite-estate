@@ -31,11 +31,11 @@ const PropertyBought = () => {
   const getStatusColor = (status) => {
     switch (status) {
       case "pending":
-        return "bg-yellow-500";
+        return "badge-warning";
       case "accepted":
-        return "bg-green-500";
+        return "bg-blue-500 border-blue-500";
       case "bought":
-        return "bg-blue-500";
+        return "badge-success";
       default:
         return "bg-gray-500";
     }
