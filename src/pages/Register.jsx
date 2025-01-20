@@ -92,6 +92,7 @@ const Register = () => {
                 name="image"
                 accept="image/*"
                 className="file-input file-input-bordered file-input-accent w-full"
+                required
               />
             </div>
           </div>
