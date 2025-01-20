@@ -18,7 +18,7 @@ const Slide = ({ image, text, desc, btn }) => {
           <p className="w-4/5 font-inter text-white mt-4 text-xl">{desc}</p>
           {btn && (
             <Link
-              to="/queries"
+              to="/allProperties"
               className="btn font-inter bg-default border-default text-white hover:bg-dark hover:border-dark mt-6"
             >
               {btn} <FaArrowRight />
