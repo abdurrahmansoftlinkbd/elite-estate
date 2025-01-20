@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   useQuery,
   //  useQueryClient
@@ -15,6 +15,7 @@ const PropertyDetails = () => {
   const { user } = useContext(AuthContext);
   const { id } = useParams();
   const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
   // const queryClient = useQueryClient();
   const [showReviewModal, setShowReviewModal] = useState(false);
   // const [reviewText, setReviewText] = useState("");
@@ -51,6 +52,7 @@ const PropertyDetails = () => {
         userEmail: user?.email,
       });
       toast.success(`${property?.title} Added to wishlist!`);
+      navigate("/dashboard/wishlist");
     } catch (error) {
       toast.error(error?.message);
     }
