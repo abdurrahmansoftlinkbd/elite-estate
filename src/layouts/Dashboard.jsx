@@ -114,7 +114,9 @@ const Dashboard = () => {
               <div className="divider"></div>
               <Link to="/">
                 <li>
-                  <a>Back to Home</a>
+                  <a>
+                    <FaHome /> Back to Home
+                  </a>
                 </li>
               </Link>
             </>
@@ -195,7 +197,9 @@ const Dashboard = () => {
               <div className="divider"></div>
               <Link to="/">
                 <li>
-                  <a>Back to Home</a>
+                  <a>
+                    <FaHome /> Back to Home
+                  </a>
                 </li>
               </Link>
             </>
