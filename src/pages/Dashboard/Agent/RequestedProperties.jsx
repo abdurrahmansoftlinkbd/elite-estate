@@ -27,8 +27,8 @@ const RequestedProperties = () => {
       const res = await axiosSecure.patch(`/acceptOffer/${offerId}`, {
         propertyId,
       });
-      console.log(res, propertyId);
-      if (res.success === 200) {
+      console.log(res.success, propertyId);
+      if (res) {
         refetch();
         toast.success("Offer accepted successfully");
       }
