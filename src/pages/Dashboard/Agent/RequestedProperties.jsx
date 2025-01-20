@@ -1,9 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-// import { toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { useContext } from "react";
 import AuthContext from "../../../providers/AuthContext";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../Loading";
+import Swal from "sweetalert2";
 
 const RequestedProperties = () => {
   const { user } = useContext(AuthContext);
@@ -12,7 +13,7 @@ const RequestedProperties = () => {
   const {
     data: offers = [],
     isLoading,
-    // refetch,
+    refetch,
   } = useQuery({
     queryKey: ["agentOffers"],
     queryFn: async () => {
@@ -35,17 +36,33 @@ const RequestedProperties = () => {
   //     }
   //   };
 
-  //   const handleRejectOffer = async (offerId) => {
-  //     try {
-  //       const res = await axiosSecure.patch(`/reject-offer/${offerId}`);
-  //       if (res.data.success) {
-  //         toast.success("Offer rejected");
-  //         refetch();
-  //       }
-  //     } catch (error) {
-  //       toast.error(error?.message);
-  //     }
-  //   };
+  const handleRejectOffer = async (offer) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const res = await axiosSecure.patch(`/rejectOffer/${offer._id}`);
+          if (res.data.modifiedCount > 0) {
+            refetch();
+            Swal.fire({
+              title: "Rejected!",
+              text: `${offer?.propertyTitle} offer has been rejected.`,
+              icon: "success",
+            });
+          }
+        } catch (error) {
+          toast.error(error?.message);
+        }
+      }
+    });
+  };
 
   if (isLoading) return <Loading />;
 
@@ -103,7 +120,7 @@ const RequestedProperties = () => {
                         Accept
                       </button>
                       <button
-                        // onClick={() => handleRejectOffer(offer._id)}
+                        onClick={() => handleRejectOffer(offer)}
                         className="btn btn-xs btn-error text-white"
                       >
                         Reject
