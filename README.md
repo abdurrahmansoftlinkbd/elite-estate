@@ -4,7 +4,7 @@ Welcome to Elite Estate, a comprehensive MERN stack platform for property buying
 
 ## Live Site
 
-Check out the live project: [Elite Estate](https://b10-a11-product-recommendation.web.app)
+Check out the live project: [Elite Estate](https://b10-a12-elite-estate.web.app)
 
 ## Access Credentials
 
