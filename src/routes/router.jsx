@@ -22,6 +22,7 @@ import Wishlist from "../pages/Dashboard/User/Wishlist";
 import MakeOffer from "../pages/Dashboard/User/MakeOffer";
 import PropertyBought from "../pages/Dashboard/User/PropertyBought";
 import RequestedProperties from "../pages/Dashboard/Agent/RequestedProperties";
+import ManageReviews from "../pages/Dashboard/Admin/ManageReviews";
 
 const router = createBrowserRouter([
   {
@@ -88,6 +89,14 @@ const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <ManageUsers></ManageUsers>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manageReviews",
+        element: (
+          <AdminRoute>
+            <ManageReviews></ManageReviews>
           </AdminRoute>
         ),
       },
