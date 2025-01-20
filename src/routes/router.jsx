@@ -23,6 +23,7 @@ import MakeOffer from "../pages/Dashboard/User/MakeOffer";
 import PropertyBought from "../pages/Dashboard/User/PropertyBought";
 import RequestedProperties from "../pages/Dashboard/Agent/RequestedProperties";
 import ManageReviews from "../pages/Dashboard/Admin/ManageReviews";
+import MySoldProperties from "../pages/Dashboard/Agent/MySoldProperties";
 
 const router = createBrowserRouter([
   {
@@ -121,6 +122,14 @@ const router = createBrowserRouter([
         element: (
           <AgentRoute>
             <MyAddedProperties></MyAddedProperties>
+          </AgentRoute>
+        ),
+      },
+      {
+        path: "mySoldProperties",
+        element: (
+          <AgentRoute>
+            <MySoldProperties></MySoldProperties>
           </AgentRoute>
         ),
       },
