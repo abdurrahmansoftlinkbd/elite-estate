@@ -28,7 +28,7 @@ const RequestedProperties = () => {
         propertyId,
       });
       console.log(res, propertyId);
-      if (res.data.success) {
+      if (res.success === 200) {
         refetch();
         toast.success("Offer accepted successfully");
       }
