@@ -55,7 +55,7 @@ const MakeOffer = () => {
     setIsSubmitting(true);
     try {
       await axiosSecure.post("/offers", {
-        propertyId: property._id,
+        propertyId: property?.propertyId,
         propertyTitle: property?.title,
         propertyLocation: property?.location,
         propertyImage: property?.image,
