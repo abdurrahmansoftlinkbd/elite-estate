@@ -37,7 +37,7 @@ const PropertyBought = () => {
       case "bought":
         return "badge-success";
       default:
-        return "bg-gray-500";
+        return "badge-error";
     }
   };
 
@@ -59,27 +59,27 @@ const PropertyBought = () => {
               <div key={property._id} className="card bg-base-100 shadow-xl">
                 <figure className="relative h-40">
                   <img
-                    src={property.propertyImage}
-                    alt={property.propertyTitle}
+                    src={property?.propertyImage}
+                    alt={property?.propertyTitle}
                     className="w-full h-full object-cover"
                   />
                   <div
-                    className={`absolute top-2 right-2 text-white badge ${getStatusColor(
-                      property.status
+                    className={`absolute top-2 right-2 text-white badge capitalize ${getStatusColor(
+                      property?.status
                     )}`}
                   >
-                    {property.status}
+                    {property?.status}
                   </div>
                 </figure>
                 <div className="card-body p-4">
                   <h3 className="card-title font-playfair">
-                    {property.propertyTitle}
+                    {property?.propertyTitle}
                   </h3>
-                  <p className="text-gray-600">{property.propertyLocation}</p>
+                  <p className="text-gray-600">{property?.propertyLocation}</p>
                   <div className="mt-2">
-                    <p className="font-medium">Agent: {property.agentName}</p>
+                    <p className="font-medium">Agent: {property?.agentName}</p>
                     <p className="text-gray-600 mt-1">
-                      Offered Amount: ${property.offerAmount.toLocaleString()}
+                      Offered Amount: ${property?.offerAmount.toLocaleString()}
                     </p>
                   </div>
 
