@@ -2,17 +2,22 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { FaCheckCircle } from "react-icons/fa";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import Loading from "./Loading";
 
 const AllPropertiesPage = () => {
   const axiosPublic = useAxiosPublic();
 
-  const { data: properties = [] } = useQuery({
+  const { data: properties = [], isLoading } = useQuery({
     queryKey: ["properties"],
     queryFn: async () => {
       const res = await axiosPublic.get("/properties");
       return res.data;
     },
   });
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <section className="container w-11/12 mx-auto my-16 font-inter">
