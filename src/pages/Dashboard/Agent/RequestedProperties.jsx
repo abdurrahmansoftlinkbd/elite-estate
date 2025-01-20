@@ -50,11 +50,10 @@ const RequestedProperties = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="container mx-auto p-8">
-      <h2 className="text-3xl font-bold text-center mb-8">
-        Requested Properties
+    <div className="container w-11/12 mx-auto my-16 font-inter">
+      <h2 className="text-3xl font-playfair font-bold text-center uppercase mb-8">
+        Requested <span className="text-default">Properties</span>
       </h2>
-
       <div className="overflow-x-auto">
         <table className="table w-full">
           <thead>
@@ -70,18 +69,18 @@ const RequestedProperties = () => {
           <tbody>
             {offers.map((offer) => (
               <tr key={offer._id}>
-                <td className="font-medium">{offer.propertyTitle}</td>
-                <td>{offer.propertyLocation}</td>
+                <td className="font-medium">{offer?.propertyTitle}</td>
+                <td>{offer?.propertyLocation}</td>
                 <td>
                   <div>
-                    <p>{offer.buyerName}</p>
-                    <p className="text-sm text-gray-500">{offer.buyerEmail}</p>
+                    <p>{offer?.buyerName}</p>
+                    <p className="text-sm text-gray-500">{offer?.buyerEmail}</p>
                   </div>
                 </td>
                 <td>${offer.offerAmount.toLocaleString()}</td>
                 <td>
                   <span
-                    className={`badge ${
+                    className={`badge text-white ${
                       offer.status === "pending"
                         ? "badge-warning"
                         : offer.status === "accepted"
