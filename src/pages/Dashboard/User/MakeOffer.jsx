@@ -69,7 +69,7 @@ const MakeOffer = () => {
       });
       refetch();
       toast.success(`${property?.title} Offer submitted successfully`);
-      navigate("/dashboard/wishlist");
+      navigate("/dashboard/propertyBought");
     } catch (error) {
       toast.error(error?.message);
     } finally {
