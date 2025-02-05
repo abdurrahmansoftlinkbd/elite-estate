@@ -128,3 +128,39 @@ The following dependencies were used in this project:
     "swiper": "^11.2.1"
 }
 ```
+
+## How to Run the Project Locally
+
+Follow the steps below to set up and run the project on your local machine:
+
+### Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/abdurrahmansoftlinkbd/recohub.git
+cd recohub
+```
+
+### Step 2: Install Dependencies
+
+```bash
+npm install
+```
+
+### Step 3: Set Up Environment Variables
+
+Create a .env.local file in the root directory and add the following environment variables:
+
+```bash
+VITE_apiKey=Your Firebase API Key
+VITE_authDomain=Your Firebase Auth Domain
+VITE_projectId=Your Firebase Project ID
+VITE_storageBucket=Your Firebase Storage Bucket
+VITE_messagingSenderId=Your Firebase Messaging Sender ID
+VITE_appId=Your Firebase App ID
+```
+
+### Step 4: Run the Project
+
+```bash
+npm run dev
+```
