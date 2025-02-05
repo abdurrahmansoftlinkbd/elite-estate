@@ -136,7 +136,7 @@ Follow the steps below to set up and run the project on your local machine:
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/abdurrahmansoftlinkbd/recohub.git
+git clone https://github.com/abdurrahmansoftlinkbd/elite-estate.git
 cd recohub
 ```
 
