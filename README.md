@@ -102,5 +102,29 @@ Check out the live project: [Elite Estate](https://b10-a12-elite-estate.web.app)
 - Database: MongoDB
 - Authentication: Firebase, JWT
 - State Management: TanStack Query
-- UI Components: daisyUI, Shadcn/ui
+- UI Components: daisyUI
 - Notifications: Sweet Alert, React Hot Toast
+
+## Dependencies
+
+The following dependencies were used in this project:
+
+```json
+"dependencies": {
+    "@tanstack/react-query": "^5.64.1",
+    "axios": "^1.7.9",
+    "firebase": "^11.1.0",
+    "localforage": "^1.10.0",
+    "match-sorter": "^8.0.0",
+    "prop-types": "^15.8.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-hot-toast": "^2.5.1",
+    "react-icons": "^5.4.0",
+    "react-rating-stars-component": "^2.2.0",
+    "react-router-dom": "^7.1.1",
+    "sort-by": "^1.2.0",
+    "sweetalert2": "^11.15.10",
+    "swiper": "^11.2.1"
+}
+```
