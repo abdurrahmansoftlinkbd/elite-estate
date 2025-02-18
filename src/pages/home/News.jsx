@@ -21,9 +21,11 @@ const News = () => {
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {news.map((newsItem) => (
-          <NewsCard key={newsItem.id} newsItem={newsItem}></NewsCard>
-        ))}
+        {news
+          .map((newsItem) => (
+            <NewsCard key={newsItem.id} newsItem={newsItem}></NewsCard>
+          ))
+          .slice(0, 3)}
       </div>
     </section>
   );
