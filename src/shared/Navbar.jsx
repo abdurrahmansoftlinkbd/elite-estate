@@ -10,14 +10,22 @@ const Navbar = () => {
       <NavLink
         to="/"
         className={({ isActive }) =>
-          `px-3 py-2 font-semibold transition-colors duration-200 ease-in-out rounded-md ${
-            isActive
-              ? "font-bold bg-white text-default rounded-md"
-              : "hover:bg-white hover:text-default hover:rounded-md"
+          `font-semibold transition-colors duration-200 ease-in-out${
+            isActive ? "font-bold underline" : "hover:underline"
           }`
         }
       >
         Home
+      </NavLink>
+      <NavLink
+        to="/allProperties"
+        className={({ isActive }) =>
+          `font-semibold transition-colors duration-200 ease-in-out${
+            isActive ? "font-bold underline" : "hover:underline"
+          }`
+        }
+      >
+        All Properties
       </NavLink>
     </>
   );
@@ -105,22 +113,10 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal items-center gap-4 px-1">
+        <ul className="menu menu-horizontal items-center gap-6 px-1">
           {links}
           {user && (
             <>
-              <NavLink
-                to="/allProperties"
-                className={({ isActive }) =>
-                  `px-3 py-2 font-semibold transition-colors duration-200 ease-in-out rounded-md ${
-                    isActive
-                      ? "font-bold bg-white text-default rounded-md"
-                      : "hover:bg-white hover:text-default hover:rounded-md"
-                  }`
-                }
-              >
-                All Properties
-              </NavLink>
               <NavLink
                 to="/dashboard"
                 className={({ isActive }) =>
