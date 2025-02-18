@@ -25,6 +25,7 @@ import RequestedProperties from "../pages/Dashboard/Agent/RequestedProperties";
 import ManageReviews from "../pages/Dashboard/Admin/ManageReviews";
 import MySoldProperties from "../pages/Dashboard/Agent/MySoldProperties";
 import MyReviews from "../pages/Dashboard/User/MyReviews";
+import News from "../pages/home/News";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,10 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
+        path: "allProperties",
+        element: <AllPropertiesPage></AllPropertiesPage>,
+      },
+      {
         path: "property/:id",
         element: (
           <PrivateRoute>
@@ -45,8 +50,8 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "allProperties",
-        element: <AllPropertiesPage></AllPropertiesPage>,
+        path: "news",
+        element: <News></News>,
       },
       {
         path: "login",

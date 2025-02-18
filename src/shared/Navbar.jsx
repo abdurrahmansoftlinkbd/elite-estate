@@ -27,6 +27,16 @@ const Navbar = () => {
       >
         All Properties
       </NavLink>
+      <NavLink
+        to="/news"
+        className={({ isActive }) =>
+          `font-semibold transition-colors duration-200 ease-in-out${
+            isActive ? "font-bold underline" : "hover:underline"
+          }`
+        }
+      >
+        News
+      </NavLink>
     </>
   );
 
