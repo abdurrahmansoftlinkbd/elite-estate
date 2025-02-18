@@ -20,7 +20,7 @@ const MeetOurAgents = () => {
   }
 
   return (
-    <section className="container w-11/12 mx-auto my-16 font-inter">
+    <section className="container w-11/12 mx-auto mb-24 font-inter">
       <div className="text-center mb-12">
         <p className="text-default font-medium text-sm mb-2">Meet Our</p>
         <h2 className="text-4xl font-bold font-playfair uppercase mb-4">
