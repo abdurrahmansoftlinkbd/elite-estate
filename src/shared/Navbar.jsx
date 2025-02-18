@@ -10,8 +10,10 @@ const Navbar = () => {
       <NavLink
         to="/"
         className={({ isActive }) =>
-          `font-semibold transition-colors duration-200 ease-in-out${
-            isActive ? "font-bold underline" : "hover:underline"
+          `${
+            isActive
+              ? "font-bold underline"
+              : "hover:underline font-semibold transition-colors duration-200 ease-in-out"
           }`
         }
       >
@@ -20,8 +22,10 @@ const Navbar = () => {
       <NavLink
         to="/allProperties"
         className={({ isActive }) =>
-          `font-semibold transition-colors duration-200 ease-in-out${
-            isActive ? "font-bold underline" : "hover:underline"
+          `${
+            isActive
+              ? "font-bold underline"
+              : "hover:underline font-semibold transition-colors duration-200 ease-in-out"
           }`
         }
       >
@@ -30,8 +34,10 @@ const Navbar = () => {
       <NavLink
         to="/news"
         className={({ isActive }) =>
-          `font-semibold transition-colors duration-200 ease-in-out${
-            isActive ? "font-bold underline" : "hover:underline"
+          `${
+            isActive
+              ? "font-bold underline"
+              : "hover:underline font-semibold transition-colors duration-200 ease-in-out"
           }`
         }
       >
@@ -130,10 +136,10 @@ const Navbar = () => {
               <NavLink
                 to="/dashboard"
                 className={({ isActive }) =>
-                  `px-3 py-2 font-semibold transition-colors duration-200 ease-in-out rounded-md ${
+                  `${
                     isActive
-                      ? "font-bold bg-white text-default rounded-md"
-                      : "hover:bg-white hover:text-default hover:rounded-md"
+                      ? "font-bold underline"
+                      : "hover:underline font-semibold transition-colors duration-200 ease-in-out"
                   }`
                 }
               >
