@@ -1,15 +1,42 @@
 [
   {
     "id": 1,
+    "category": "Sustainable Living",
+    "image": "https://i.ibb.co.com/R4Z8TLdW/outsite-co-R-LK3sq-Li-Bw-unsplash.jpg",
+    "title": "Why Eco-Friendly Homes Are in High Demand",
+    "description": "Learn why eco-friendly homes are gaining popularity, with features like solar panels, energy efficiency, and sustainable materials.",
+    "addedBy": "John",
+    "date": "February 18, 2025"
+  },
+  {
+    "id": 2,
+    "category": "Home Improvement",
+    "image": "https://i.ibb.co.com/XRZTjq7/im3rd-media-FJZt-Zld-A-u-E-unsplash.jpg",
+    "title": "Affordable Home Renovation Ideas to Boost Value",
+    "description": "Explore budget-friendly renovation ideas to enhance your home's appeal and increase its market value.",
+    "addedBy": "Emily",
+    "date": "February 14, 2025"
+  },
+  {
+    "id": 3,
+    "category": "Market Trends",
+    "image": "https://i.ibb.co.com/7drRCFNP/phil-hearing-Qs-KDo-RPsn-IE-unsplash.jpg",
+    "title": "Current Housing Market Trends to Watch",
+    "description": "Stay informed about the latest housing market trends, including price changes, demand shifts, and emerging hotspots.",
+    "addedBy": "Sarah",
+    "date": "February 10, 2025"
+  },
+  {
+    "id": 4,
     "category": "Home Buying Tips",
     "image": "https://i.ibb.co.com/dLFfQL1/aaron-huber-G7s-E2-S4-Lab4-unsplash.jpg",
     "title": "Top 10 Tips for First-Time Homebuyers",
     "description": "Discover essential tips and tricks for first-time homebuyers, including budgeting, financing, and choosing the right property.",
     "addedBy": "Omar",
-    "date": "January 13, 2025"
+    "date": "January 17, 2025"
   },
   {
-    "id": 2,
+    "id": 5,
     "category": "Luxury Properties",
     "image": "https://i.ibb.co.com/w6Lr7cR/brian-babb-Xbw-Hrt87m-Q0-unsplash.jpg",
     "title": "New Luxury Villas Launch in California",
@@ -18,7 +45,7 @@
     "date": "January 12, 2025"
   },
   {
-    "id": 3,
+    "id": 6,
     "category": "Investment Opportunities",
     "image": "https://i.ibb.co.com/sjD2gvP/filtergrade-4-T4-Ac-GJv-ARQ-unsplash.jpg",
     "title": "Top Real Estate Investment Cities for 2025",
