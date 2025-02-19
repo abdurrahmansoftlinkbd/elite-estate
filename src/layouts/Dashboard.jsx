@@ -8,13 +8,13 @@ import {
   FaUsers,
   FaUserTie,
 } from "react-icons/fa";
-import { MdRateReview, MdReviews } from "react-icons/md";
+// import { MdRateReview, MdReviews } from "react-icons/md";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import AuthContext from "../providers/AuthContext";
 import {
   FaBuildingCircleArrowRight,
-  FaBuildingCircleCheck,
+  // FaBuildingCircleCheck,
   FaMoneyCheckDollar,
 } from "react-icons/fa6";
 import { SiWish } from "react-icons/si";
@@ -95,7 +95,7 @@ const Dashboard = () => {
                   </a>
                 </li>
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 className={({ isActive }) =>
                   `font-semibold transition-colors duration-200 ease-in-out rounded-md ${
                     isActive
@@ -110,7 +110,7 @@ const Dashboard = () => {
                     <MdReviews /> Manage Reviews
                   </a>
                 </li>
-              </NavLink>
+              </NavLink> */}
               <div className="divider"></div>
               <Link to="/">
                 <li>
@@ -123,7 +123,16 @@ const Dashboard = () => {
           )}
           {role.role === "agent" && (
             <>
-              <NavLink to="/dashboard/agentProfile">
+              <NavLink
+                className={({ isActive }) =>
+                  `font-semibold transition-colors duration-200 ease-in-out rounded-md ${
+                    isActive
+                      ? "font-bold bg-white text-default rounded-md"
+                      : "hover:bg-white hover:text-default hover:rounded-md"
+                  }`
+                }
+                to="/dashboard/agentProfile"
+              >
                 <li>
                   <a>
                     <FaUserGraduate /> Agent Profile
@@ -162,7 +171,7 @@ const Dashboard = () => {
                   </a>
                 </li>
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 className={({ isActive }) =>
                   `font-semibold transition-colors duration-200 ease-in-out rounded-md ${
                     isActive
@@ -177,7 +186,7 @@ const Dashboard = () => {
                     <FaBuildingCircleCheck /> My Sold Properties
                   </a>
                 </li>
-              </NavLink>
+              </NavLink> */}
               <NavLink
                 className={({ isActive }) =>
                   `font-semibold transition-colors duration-200 ease-in-out rounded-md ${
@@ -206,7 +215,16 @@ const Dashboard = () => {
           )}
           {role.role === "user" && (
             <>
-              <NavLink to="/dashboard/myProfile">
+              <NavLink
+                className={({ isActive }) =>
+                  `font-semibold transition-colors duration-200 ease-in-out rounded-md ${
+                    isActive
+                      ? "font-bold bg-white text-default rounded-md"
+                      : "hover:bg-white hover:text-default hover:rounded-md"
+                  }`
+                }
+                to="/dashboard/myProfile"
+              >
                 <li>
                   <a>
                     <FaUser /> My Profile
@@ -245,7 +263,7 @@ const Dashboard = () => {
                   </a>
                 </li>
               </NavLink>
-              <NavLink
+              {/* <NavLink
                 className={({ isActive }) =>
                   `font-semibold transition-colors duration-200 ease-in-out rounded-md ${
                     isActive
@@ -260,7 +278,7 @@ const Dashboard = () => {
                     <MdRateReview /> My Reviews
                   </a>
                 </li>
-              </NavLink>
+              </NavLink> */}
               <div className="divider"></div>
               <Link to="/">
                 <li>
