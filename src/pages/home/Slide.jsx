@@ -10,7 +10,7 @@ const Slide = ({ image, text, desc, btn }) => {
         backgroundImage: `url(${image})`,
       }}
     >
-      <div className="relative w-full h-full bg-gray-900/70">
+      <div className="relative w-full h-full bg-gray-900/40">
         <div className="w-3/4 absolute top-1/4 left-16">
           <h2 className="text-3xl lg:text-6xl font-playfair font-semibold text-white">
             {text}
