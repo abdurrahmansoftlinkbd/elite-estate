@@ -4,6 +4,7 @@ import AllProperties from "./AllProperties";
 import MeetOurAgents from "./MeetOurAgents";
 import Testimonials from "./Testimonials";
 import ContactPage from "../Contact";
+import About from "./About";
 
 const Home = () => {
   return (
@@ -13,6 +14,9 @@ const Home = () => {
       </header>
       <section className="container w-11/12 mx-auto my-24 font-inter">
         <AllProperties></AllProperties>
+      </section>
+      <section className="my-24 font-inter">
+        <About></About>
       </section>
       <section>
         <MeetOurAgents></MeetOurAgents>
