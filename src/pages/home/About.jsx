@@ -1,4 +1,4 @@
-import { ArrowRight, Check, Phone } from "lucide-react";
+import { Check, Phone } from "lucide-react";
 
 export default function About() {
   return (
@@ -43,11 +43,6 @@ export default function About() {
                 <p className="font-semibold">+01 234 56789</p>
               </div>
             </div>
-
-            <button className="btn bg-default border-default text-white hover:bg-dark hover:border-dark gap-2">
-              More About Realtor
-              <ArrowRight className="w-4 h-4" />
-            </button>
           </div>
         </div>
 
