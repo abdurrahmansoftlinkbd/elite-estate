@@ -20,7 +20,7 @@ const News = () => {
           From real estate industry and beyond.
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-4 lg:gap-y-0 justify-items-center">
         {news
           .map((newsItem) => (
             <NewsCard key={newsItem.id} newsItem={newsItem}></NewsCard>
