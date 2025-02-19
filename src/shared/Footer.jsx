@@ -43,7 +43,7 @@ const Footer = () => {
               web@eliteestate.com
             </Link>
           </p>
-          <p className="mb-2">Helpline: 01322901105 , 01332502004</p>
+          <p className="mb-2">Helpline: +01 234 56789</p>
           <div className="grid grid-flow-col gap-4">
             <a href="https://x.com/" target="_blank">
               <svg
