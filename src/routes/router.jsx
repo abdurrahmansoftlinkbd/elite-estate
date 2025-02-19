@@ -26,6 +26,7 @@ import ManageReviews from "../pages/Dashboard/Admin/ManageReviews";
 import MySoldProperties from "../pages/Dashboard/Agent/MySoldProperties";
 import MyReviews from "../pages/Dashboard/User/MyReviews";
 import NewsPage from "../pages/NewsPage";
+import Contact from "../pages/Contact";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +53,14 @@ const router = createBrowserRouter([
       {
         path: "news",
         element: <NewsPage></NewsPage>,
+      },
+      {
+        path: "contact",
+        element: (
+          <PrivateRoute>
+            <Contact></Contact>
+          </PrivateRoute>
+        ),
       },
       {
         path: "login",

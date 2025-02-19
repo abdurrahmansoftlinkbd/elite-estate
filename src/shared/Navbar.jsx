@@ -134,6 +134,18 @@ const Navbar = () => {
           {user && (
             <>
               <NavLink
+                to="/contact"
+                className={({ isActive }) =>
+                  `${
+                    isActive
+                      ? "font-bold underline"
+                      : "hover:underline font-semibold transition-colors duration-200 ease-in-out"
+                  }`
+                }
+              >
+                Contact
+              </NavLink>
+              <NavLink
                 to="/dashboard"
                 className={({ isActive }) =>
                   `${
