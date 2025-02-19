@@ -68,13 +68,13 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-base-100 text-zinc-950 rounded-box z-[10] mt-3 w-52 p-2 shadow"
           >
             {links}
             {user && (
               <>
                 <NavLink
-                  to="/allProperties"
+                  to="/contact"
                   className={({ isActive }) =>
                     `${
                       isActive
@@ -83,7 +83,7 @@ const Navbar = () => {
                     }`
                   }
                 >
-                  All Properties
+                  Contact
                 </NavLink>
                 <NavLink
                   to="/dashboard"
