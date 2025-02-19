@@ -5,6 +5,7 @@ import MeetOurAgents from "./MeetOurAgents";
 import Testimonials from "./Testimonials";
 import ContactPage from "../Contact";
 import About from "./About";
+import Services from "./Services";
 
 const Home = () => {
   return (
@@ -17,6 +18,9 @@ const Home = () => {
       </section>
       <section className="my-24 font-inter">
         <About></About>
+      </section>
+      <section className="mb-24 font-inter">
+        <Services></Services>
       </section>
       <section>
         <MeetOurAgents></MeetOurAgents>
