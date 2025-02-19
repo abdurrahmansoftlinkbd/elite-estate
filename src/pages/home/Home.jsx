@@ -2,6 +2,7 @@ import News from "./News";
 import Slider from "./Slider";
 import AllProperties from "./AllProperties";
 import MeetOurAgents from "./MeetOurAgents";
+import Testimonials from "./Testimonials";
 
 const Home = () => {
   return (
@@ -17,6 +18,9 @@ const Home = () => {
       </section>
       <section className="container w-11/12 mx-auto mb-24">
         <News></News>
+      </section>
+      <section className="container w-11/12 mx-auto mb-24">
+        <Testimonials></Testimonials>
       </section>
     </>
   );
